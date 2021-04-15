@@ -1,0 +1,5 @@
+int goal #unit: seconds
+---
+string result
+---
+string feedback

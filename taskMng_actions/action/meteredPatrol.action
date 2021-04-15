@@ -1,0 +1,5 @@
+float32 goal #unit: meter
+---
+string result
+---
+string feedback

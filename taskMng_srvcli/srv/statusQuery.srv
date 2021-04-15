@@ -1,0 +1,3 @@
+string query # the status of interest
+---
+string response # to the specific status of the query, or can be a briefing report of all status

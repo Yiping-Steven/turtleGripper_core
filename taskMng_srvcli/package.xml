@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>taskMng_srv</name>
+  <name>taskMng_srvcli</name>
   <version>0.0.0</version>
-  <description>The taskMng_srv package</description>
+  <description>The taskMng_srvcli package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/taskMng_srv</url> -->
+  <!-- <url type="website">http://wiki.ros.org/taskMng_srvcli</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -50,13 +50,10 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>actionlib</build_depend>
-  <build_depend>roscpp</build_depend>
   <build_depend>taskMng_actions</build_depend>
   <build_export_depend>actionlib</build_export_depend>
-  <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>taskMng_actions</build_export_depend>
   <exec_depend>actionlib</exec_depend>
-  <exec_depend>roscpp</exec_depend>
   <exec_depend>taskMng_actions</exec_depend>
 
 

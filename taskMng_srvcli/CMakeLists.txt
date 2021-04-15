@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(taskMng_srv)
+project(taskMng_srvcli)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -9,7 +9,6 @@ project(taskMng_srv)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   actionlib
-  roscpp
   taskMng_actions
 )
 
@@ -104,8 +103,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES taskMng_srv
-#  CATKIN_DEPENDS actionlib roscpp taskMng_actions
+#  LIBRARIES taskMng_srvcli
+#  CATKIN_DEPENDS actionlib taskMng_actions
 #  DEPENDS system_lib
 )
 
@@ -122,7 +121,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/taskMng_srv.cpp
+#   src/${PROJECT_NAME}/taskMng_srvcli.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -133,7 +132,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/taskMng_srv_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/taskMng_srvcli_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -197,7 +196,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_taskMng_srv.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_taskMng_srvcli.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
