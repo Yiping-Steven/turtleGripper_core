@@ -131,7 +131,7 @@ public:
     void tskFetchingGoalCB();       // TODO, Yiping's assignment
     void tskMappingGoalCB();        //TODO, Yiping's assignment
 
-    void tskGlobalNavigation(); // TODO, Irina's assignment
+    void tskGlobalNavigation(); // TODO, Yiping's and Irina's assignment
     void tskLocalManeuver(); // TODO, Irina and Jian's assignment
     void tskLocalManipulation(); // TODO, Jian's assignment
 
