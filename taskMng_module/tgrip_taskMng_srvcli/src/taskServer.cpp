@@ -41,12 +41,46 @@ void tgrip_taskMng_server::tskMngSrvCB( tgrip_taskMng_msgs::assignTask::Request 
 
 
 void tgrip_taskMng_server::tskTimedPatrolGoalCB(){
-  // 1. tskGlobalNavigation
-  // 2. tskLocalManeuver
-  // 3. tskLocalmanipulation();
+  // 1. tskGlobalNavigation()
+  /*Call [Nav], from its base, start exploring. 
+    Random walking is the bottom line, but I'll try to be inclusive. (Use AR tags)
+    While [Nav] is doing global exploring, call [CV] once in a while to find target boxes.
+         2.a In case [CV] founds a target but not very sure, return a pose. 
+              Send that 2D pose to [Nav] and [Nav] will record it  (hereby known as "uncertain" pose) 
+              and check later.
+         2.b In case [CV] founds a target and is sure, return a pose. 
+              Send that pose to [Nav]. [Nav] will pasue the exploration, 
+              and start a go-pick-go-place subTask immediately. 
+              Check this pose against the saved "uncertain" poses. 
+              If the pose is within R =20 cm radius of any "uncertain" poses, delete that "uncertain" pose.
+         2.c In case [CV] founds nothing. 
+            Continue global exploration until one of the exit conditions is satisfied.
+    */
+  // 2. tskLocalManeuver()
+   	    // Record the current location. 
+        // Call [Nav] to go to the target location.
+        // If [Nav] reported Goal Reached, Call [CV] to check if target can still be found. 
+        // If not, Call [Nav] to do a local searching. Finely adjust the pose, prepare for manipulation 
+        // (basically what this does is rotate along z axis and detect )
+        // If found, check if it's within the reach of [Manip]. 
+        // If within, Call [Manip] to start picking. 
+        // If still not found, abandoned the task. 
+
+  // 3. tskLocalManipulation(); 
+      // do the picking.
+      // If succeeded, Call [Nav] to return to base and do a similar reverse placing
+      // Call [Nav] to return to the original "current location" at the beginning.	
+      //Exit go-pick-go-place subtaask and	Resume the global exploration process
+
 
 }
-void tgrip_taskMng_server::tskMeteredPatrolGoalCB(){};
+
+
+
+
+void tgrip_taskMng_server::tskMeteredPatrolGoalCB(){
+  // very similar to tskTimedPatrolGoalCB, difference is merely the termination condition
+};
 
 void tgrip_taskMng_server::tskMeteredPatrolGoalCB(){};
 
