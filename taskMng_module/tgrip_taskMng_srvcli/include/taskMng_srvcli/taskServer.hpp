@@ -1,14 +1,15 @@
 #include <ros/ros.h>
 
 // actions
+//[Nav]
 #include <tgrip_nav_actions/moveAction.h>
 #include <tgrip_nav_actions/exploreAction.h>
 #include <tgrip_nav_actions/maneuverAction.h>
 #include <tgrip_nav_actions/returnAction.h>
-
+//[Man]
 #include <tgrip_man_actions/pickAction.h>
 #include <tgrip_man_actions/placeAction.h>
-
+//[CV]
 #include <actionlib/server/simple_action_server.h>
 #include <actionlib/server/simple_action_client.h>
 
@@ -31,8 +32,13 @@
 
 class tgrip_taskMng_server{
 
+    /* ***********************************types definition***********************************  */
+    //Tasks
     typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskMeteredPatrolAction> tskMeteredPatrolActionServer;
     typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskTimedPatrolAction> tskTimedPatrolActionServer;
+    typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskFetchingAction> tskFetchingActionServer;
+    typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskMappingAction> tskMappingActionServer;
+    // subTasks
     typedef actionlib::SimpleActionClient<tgrip_nav_actions::navMoveAction> navMoveActionClient;
     typedef actionlib::SimpleActionClient<tgrip_nav_actions::navExploreAction> navExploreActionClient;
     typedef actionlib::SimpleActionClient<tgrip_nav_actions::navManeuverAction> navManeuverActionClient;
@@ -42,24 +48,46 @@ class tgrip_taskMng_server{
 
 private:
 
+    /* ***********************************Objects, All series***********************************  */
     ros::NodeHandle nh;
     // timer
     time_t timerMissionStart; // unit in seconds
     time_t timerPhase1;
     time_t timerPhase2;
     time_t timerPhase3;
-    // ......
+    // meter
+    double distMeasure; // unit in meters
+    // map
+    pcl::pointCloud roomMap;
+    // software status
+    geometry_msgs::Pose2D poseCurrent; // store the real time pose.
+    bool hasDoneMapping;
+    // hardware status 
+    bool batteryStatus;
 
-    // all servers
+    // task related
+    std::vector<cv_msgs::target>  targetList; // create a target message type that stores the pose and certainty 
+    ros::Publisher pubCmd; // for publishing movement command
+    ros::Subscriber subOdom; // for updating the real time pose.
     ros::ServiceServer taskMngServer; // serving the USER client
-    std::unique_ptr<tgrip_taskMng_actions::meteredPatrolAction> tskMeteredPatrolASPtr; 
-    std::unique_ptr<tgrip_taskMng_actions::timedPatrolAction>   tsktimedPatrolASPtr; // respond to different user requests. 
+
+    /* ***********************************Objects, Task oriented***********************************  */
+
+    // action servers
+    std::unique_ptr<tskMappingActionServer> tskMappingASPtr; 
+    std::unique_ptr<tskFetchingActionServer> tskFetchingASPtr; 
+    std::unique_ptr<tskMeteredPatrolActionServer> tskMeteredPatrolASPtr; 
+    std::unique_ptr<tskTimedPatrolActionServer>   tskTimedPatrolASPtr; // respond to different user requests. 
+
     // all clients
+    // three navigation related
     std::unique_ptr<navExploreActionClient> navExploreACPtr; // [Nav] doing global exploration
     std::unique_ptr<navManeuverActionClient> navManeuverACPtr; // [Nav] doing local maneuver
     std::unique_ptr<navReturnActionClient> navReturnACPtr; // [Nav] returning to bace
+    // two manipulation related
     std::unique_ptr<manPlaceActionClient> manPlaceACPtr; // [Man] doing placing
     std::unique_ptr<manPickActionClient> manPickACPtr; // [Man] doing picking
+    // one computer vision related
     std::unique_ptr<ros::ServiceClient > cvIdClientPtr; //[CV] requesting detection resulty
 
     // [Nav]
@@ -73,10 +101,7 @@ private:
     tgrip_nav_actions::navReturnGoal navReturnGoal; // return to a base location
     tgrip_nav_actions::navReturnFeedback navReturnFeedback;
     tgrip_nav_actions::navReturnResult navReturnResult;
-    // all series
-    ros::Publisher pubCmd; // for publishing movement command
-    ros::Subscriber subOdom; // for updating the real time pose.
-    geometry_msgs::Pose2D poseCurrent; // store the real time pose.
+    // all series (Yiping, add whatever you want here.)
 
     // [Man]
     // actions
@@ -89,23 +114,26 @@ private:
     // all series (Jian, add whatever you want here.)
 
     // [CV]
-    std::vector<cv_msgs::target>  targetList; // create a target message type that stores the pose and certainty 
     // all series (Irina, add whatever you want here)
 
 public:
 
-    tgrip_taskMng_server(ros::NodeHandle& nh); 
+    // functions, all series 
+    tgrip_taskMng_server(ros::NodeHandle& nh);  // construction, done
+    void tskMngSrvCB( tgrip_taskMng_msgs::assignTask::Request &req,
+                      tgrip_taskMng_msgs::assignTask::Response &res ); // almost done
+    void odomCallback(const tgrip_nav_msgs::Odometry::ConstPtr& odomMsgPtr); // done
 
-    void init();
 
-    void tskMeteredPatrolActionCB();
-    
-    void tskTimedPatrolActionCB();
+    // functions, task oriented
+    void tskMeteredPatrolGoalCB();    // TODO, together
+    void tskTimedPatrolGoalCB();    // TODO, together
+    void tskFetchingGoalCB();       // TODO, Yiping's assignment
+    void tskMappingGoalCB();        //TODO, Yiping's assignment
 
-    void tskGlobalNavigation(); // Yiping's assignment
-    void tskLocalManeuver(); // Irina's assignment
-    void tskLocalManipulation(); // Jian's assignment
+    void tskGlobalNavigation(); // TODO, Irina's assignment
+    void tskLocalManeuver(); // TODO, Irina and Jian's assignment
+    void tskLocalManipulation(); // TODO, Jian's assignment
 
-    void odomCallback(const tgrip_nav_msgs::Odometry::ConstPtr& odomMsgPtr);
     
 };

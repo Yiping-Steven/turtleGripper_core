@@ -1,14 +1,57 @@
-#include <taskMng_srvcli/server.hpp>
+#include <taskMng_srvcli/taskServer.hpp>
+#include <taskMng_srvcli/subTaskServer.hpp>
 
-taskMngServer::taskMngServer (ros::NodeHandle& nh): nh( nh ){
+tgrip_taskMng_server::tgrip_taskMng_server (ros::NodeHandle& nh): nh( nh ){
 
   subOdom = nh.subscribe("/odom", 1000, & taskMngServer::odomCallback, this);
   pubCmd = nh.advertise<geometry_msgs::Twist>("/cmd_vel_mux/input/teleop", 10);
+  taskMngServer = nh.advertiseService("tgrip_taskMng_server", &tgrip_tskMng_server::tskMngSrvCB, this);
+}
 
+
+void tgrip_taskMng_server::tskMngSrvCB( tgrip_taskMng_msgs::assignTask::Request &req,
+                  tgrip_taskMng_msgs::assignTask::Response &res ){
+
+  // switch between all sorts of tasks
+  // in case tskTimedPatrolAction is requested:
+  init(req);
+  tskTimedPatrolASPtr.reset( new tskTimedPatrolActionServer(nh, "tskTimedPatrolActionServer", false) );
+  tskTimedPatrolASPtr->registerGoalCallback( boost::bind( tgrip_taskMng_server::tskTimedPatrolGoalCB() ));
+  tskTimedPatrolASPtr->start();
+
+  // in case tskMeteredPatrolAction is requested:
+  init(req);
+  tskMeteredPatrolASPtr.reset( new tskMeteredPatrolActionServer(nh, "tskMeteredPatrolActionServer", false) );
+  tskMeteredPatrolASPtr->registerGoalCallback( boost::bind( tgrip_taskMng_server::tskMeteredPatrolGoalCB() ));
+  tskMeteredPatrolASPtr->start();
+
+  // in case tskMappingAction is requested:
+  init(req);
+  tskMappingASPtr.reset( new tskMappingActionServer(nh, "tskMappingActionServer", false) );
+  tskMappingASPtr->registerGoalCallback( boost::bind( tgrip_taskMng_server::tskMappingGoalCB() ));
+  tskMappingASPtr->start();
+  
+  // in case tskFetchingAction is requested:
+  init(req);
+  tskFetchingASPtr.reset( new tskFetchingActionServer(nh, "tskFetchingActionServer", false) );
+  tskFetchingASPtr->registerGoalCallback( boost::bind( tgrip_taskMng_server::tskFetchingGoalCB() ));
+  tskFetchingASPtr->start();
 
 }
 
-void taskMngServer::goalCB(){
+
+void tgrip_taskMng_server::tskTimedPatrolGoalCB(){
+  // 1. tskGlobalNavigation
+  // 2. tskLocalManeuver
+  // 3. tskLocalmanipulation();
+
+}
+void tgrip_taskMng_server::tskMeteredPatrolGoalCB(){};
+
+void tgrip_taskMng_server::tskMeteredPatrolGoalCB(){};
+
+
+void tgrip_taskMng_server::tskFetchingGoalCB(){
   std::cout << "taskMngServer::goalCB" << std::endl;
   goal = *(as->acceptNewGoal());
   std::cout << "New Goal Received:  ("<< goal.goal.poseGoal.x << ", "
@@ -16,6 +59,7 @@ void taskMngServer::goalCB(){
                                       << goal.goal.poseGoal.theta << " ) "
                                       << std::endl;
   time(&timerMissionStart);
+  distMeasure = 0;
 
   
   double theta1 = atan2(goal.goal.poseGoal.y - poseCurrent.y, goal.goal.poseGoal.x - poseCurrent.x ); // unit in rad
@@ -77,18 +121,11 @@ void taskMngServer::goalCB(){
   // as->publishResult(result);
   std::cout<<"succeed" << std::endl;
   as->setSucceeded();
-
-  // for (int i=0; i<5; i++){
-  //   rsp_turtlebot_actions::moveFeedback feedback;
-  //   feedback.feedback.feedbackCode = std::to_string(i);
-  //   as->publishFeedback(feedback);
-  //   ros::Duration(1).sleep();
-  // }
-
   
 };
 
-void taskMngServer::odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsgPtr){
+
+void tgrip_taskMng_server::odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsgPtr){
   // convert the Odometry into Pose2D
   tf::Quaternion q( odomMsgPtr->pose.pose.orientation.x,
                     odomMsgPtr->pose.pose.orientation.y,
