@@ -29,18 +29,16 @@
 #define PI 3.1415926
 
 
-class tgrip_taskMngServer{
-    // task action server
-    typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::meteredPatrolAction> tskMeteredPatrolActionServer;
-    typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::timedPatrolAction> timedPatrolActionServer;
-    // subtask action clients [Nav]
-    typedef actionlib::SimpleActionClient<tgrip_nav_actions::moveAction> navMoveActionClient;
-    typedef actionlib::SimpleActionClient<tgrip_nav_actions::exploreAction> navExploreActionClient;
-    typedef actionlib::SimpleActionClient<tgrip_nav_actions::maneuverAction> navManeuverActionClient;
-    typedef actionlib::SimpleActionClient<tgrip_nav_actions::returnAction> navReturnActionClient;
-    // subtask action clients [Nav]
-    typedef actionlib::SimpleActionClient<tgrip_man_actions::placeAction> manPlaceActionClient;
-    typedef actionlib::SimpleActionClient<tgrip_man_actions::pickAction> manPickActionClient;
+class tgrip_taskMng_server{
+
+    typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskMeteredPatrolAction> tskMeteredPatrolActionServer;
+    typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskTimedPatrolAction> tskTimedPatrolActionServer;
+    typedef actionlib::SimpleActionClient<tgrip_nav_actions::navMoveAction> navMoveActionClient;
+    typedef actionlib::SimpleActionClient<tgrip_nav_actions::navExploreAction> navExploreActionClient;
+    typedef actionlib::SimpleActionClient<tgrip_nav_actions::navManeuverAction> navManeuverActionClient;
+    typedef actionlib::SimpleActionClient<tgrip_nav_actions::navReturnAction> navReturnActionClient;
+    typedef actionlib::SimpleActionClient<tgrip_man_actions::manPlaceAction> manPlaceActionClient;
+    typedef actionlib::SimpleActionClient<tgrip_man_actions::manPickAction> manPickActionClient;
 
 private:
 
@@ -94,16 +92,19 @@ private:
     std::vector<cv_msgs::target>  targetList; // create a target message type that stores the pose and certainty 
     // all series (Irina, add whatever you want here)
 
-
-
 public:
 
-    tgrip_taskMngServer(ros::NodeHandle& nh); 
+    tgrip_taskMng_server(ros::NodeHandle& nh); 
 
     void init();
 
-    void run(tgrip_taskMng_srvcli::serveUser::Request &req, 
-                tgrip_taskMng_srvcli::serveUser::Response &res);
+    void tskMeteredPatrolActionCB();
+    
+    void tskTimedPatrolActionCB();
+
+    void tskGlobalNavigation(); // Yiping's assignment
+    void tskLocalManeuver(); // Irina's assignment
+    void tskLocalManipulation(); // Jian's assignment
 
     void odomCallback(const tgrip_nav_msgs::Odometry::ConstPtr& odomMsgPtr);
     

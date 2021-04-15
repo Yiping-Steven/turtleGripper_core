@@ -1,0 +1,5 @@
+tgrip_taskMng_msgs/manPickGoal goal
+---
+tgrip_taskMng_msgs/manPickFeedback feedback
+---
+tgrip_taskMng_msgs/manPickResult result
