@@ -61,6 +61,7 @@ private:
     pcl::pointCloud roomMap;
     // software status
     geometry_msgs::Pose2D poseCurrent; // store the real time pose.
+    geometry_msgs::Pose3D optimalGrippingPose;// obtaining from workspace calculation
     bool hasDoneMapping;
     // hardware status 
     bool batteryStatus;
