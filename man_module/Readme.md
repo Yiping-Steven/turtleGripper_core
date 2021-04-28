@@ -1,4 +1,5 @@
-# Jian, here's the module for you to put anything you like.
+Open Manipulator
+
 https://emanual.robotis.com/docs/en/platform/openmanipulator_x/overview/#overview
 
 To run rivz with real robot,
