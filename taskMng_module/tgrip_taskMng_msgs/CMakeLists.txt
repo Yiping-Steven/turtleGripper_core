@@ -49,22 +49,30 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  exploreFeedback.msg
-  maneuverFeedback.msg
-  returnFeedback.msg
+  navExploreFeedback.msg
+  navManeuverFeedback.msg
+  navReturnFeedback.msg
 
-  exploreResult.msg
-  maneuverResult.msg
-  returnResult.msg
+  navExploreResult.msg
+  navManeuverResult.msg
+  navReturnResult.msg
 
-  exploreGoal.msg
-  maneuverGoal.msg
-  returnGoal.msg
+  navExploreGoal.msg
+  navManeuverGoal.msg
+  navReturnGoal.msg
+
+  tskManageFeedback.msg
+  tskManageGoal.msg
+  tskManageResult.msg
+  
+  tskTimedPatrolFeedback.msg
+  tskTimedPatrolGoal.msg
+  tskTimedPatrolResult.msg
 )
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
-  statusQuery.srv
+  serviceQuery.srv
 )
 
 ## Generate actions in the 'action' folder

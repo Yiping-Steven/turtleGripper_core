@@ -1,0 +1,1 @@
+string resultCode # sending back a human-friendly result report

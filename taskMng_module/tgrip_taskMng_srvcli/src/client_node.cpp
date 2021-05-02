@@ -1,65 +1,55 @@
 #include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
-#include <rsp_turtlebot_actions/moveAction.h>
-// #include <rsp_turtlebot_actions/moveFeedback.h>
+#include <tgrip_taskMng_srvcli/taskClient.hpp>
+// #include <tgrip_taskMng_actions/moveAction.h>
+// #include <tgrip_taskmng_actions/moveFeedback.h>
+#include <iostream>
 #include <sstream>
 #include <string>
 
 using namespace std;
 
-
-// void feedback( const moveFeedback& feedback){
-//     ROS_INFO("Feedback Message: %s", feedback->c_str() );
-// }
+string taskNameArray[] = {"mapping", "fetching", "timedPatrol", "meteredPatrol"};
+string taskName;
 
 int main( int argc, char** argv ){
-    ros::init( argc, argv, "client");
+    ros::init( argc, argv, "tGrip_TaskMng_Client");
     ros::NodeHandle nh;
+    tgrip::tskMngCliClass client(nh);
+    tgrip_taskMng_msgs::serviceQuery taskInitSrv;
 
-    actionlib::SimpleActionClient<rsp_turtlebot_actions::moveAction> ac("action_server", true);
-    ac.waitForServer();
+    while(ros::ok()){
 
-    rsp_turtlebot_actions::moveGoal goal1, goal2;
-    goal1.goal.goalCode = std::string("A new goal");
+        // User interface
+        std::cout<< "Dear User, turtleGripper is at your service"<<std::endl
+                << "please enter the command code: " << std::endl
+                << "1. Mapping. " << std::endl 
+                << "2. Fetching." << std::endl
+                << "3. Patrol for a period. " << std::endl
+                << "4. Patrol for a distance." << std::endl;
 
-    string xStr = string(argv[1]);
-    string yStr = string(argv[2]);
-    string thetaStr = string(argv[3]);
-    string posTolStr = string(argv[4]);
-    string angTolStr = string(argv[5]);
+        // Interpreting input
+        string cmdStr;
+        std::cin>> cmdStr;
+        int cmdInt = stoi(cmdStr);
+        taskName = taskNameArray[cmdInt];
 
-    istringstream(xStr) >> goal1.goal.poseGoal.x;
-    istringstream(yStr) >> goal1.goal.poseGoal.y;
-    istringstream(thetaStr) >> goal1.goal.poseGoal.theta;
-    istringstream(angTolStr) >> goal1.goal.angTol;
-    istringstream(posTolStr) >> goal1.goal.posTol;
+        // Sending request
+        taskInitSrv.request.queryStr = taskName;
+        taskInitSrv.request.queryCode = cmdInt;
 
-    goal2 = goal1;
-    goal2.goal.poseGoal.x+=1;
-    
-
-    bool res1;
-    ac.sendGoal( goal1 );
-    res1 = ac.waitForResult( ros::Duration(30.0) );
-
-    if (res1) {
-        actionlib::SimpleClientGoalState state = ac.getState();
-        std::cout << state.toString().c_str() << std::endl;
+        if (client.client.call(taskInitSrv))
+        {
+            ROS_INFO("Response from the server: %s", taskInitSrv.response.replyStr.c_str());
+        }
+        else
+        {
+            ROS_ERROR("Failed to call the service 111");
+            return 1;
+        }
     }
 
 
-
-    // bool res2;
-    // ac.sendGoal( goal2 );
-    // res2 = ac.waitForResult( ros::Duration(30.0) );
-
-    // if (res2) {
-    //     actionlib::SimpleClientGoalState state = ac.getState();
-    //     std::cout << state.toString().c_str() << std::endl;
-    // }
-
-
-    // ros::spin(); //waiting there.
 
     return 0;
 }

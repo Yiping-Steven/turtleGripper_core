@@ -1,62 +1,65 @@
-#include <taskMng_srvcli/taskServer.hpp>
-#include <taskMng_srvcli/subTaskServer.hpp>
+#include <tgrip_taskMng_srvcli/taskManager.hpp>
+// #include <tgrip_taskMng_srvcli/subTaskServer.hpp>
 
-tgrip_taskMng_server::tgrip_taskMng_server (ros::NodeHandle& nh): nh( nh ){
+tgrip::taskManager::taskManager (ros::NodeHandle& nh): nh( nh ){
 
-  subOdom = nh.subscribe("/odom", 1000, & taskMngServer::odomCallback, this);
-  pubCmd = nh.advertise<geometry_msgs::Twist>("/cmd_vel_mux/input/teleop", 10);
-  taskMngServer = nh.advertiseService("tgrip_taskMng_server", &tgrip_tskMng_server::tskMngSrvCB, this);
+  taskServer = nh.advertiseService("tgrip::taskManager", &tgrip::taskManager::tskMngSrvCB, this);
+  subOdom = nh.subscribe("/odometry/filtered", 1000, & taskManager::odomCallback, this);
+  pubCmd = nh.advertise<geometry_msgs::Twist>("/tskManager/cmd_vel", 10);
+
 }
 
 
-void tgrip_taskMng_server::tskMngSrvCB( tgrip_taskMng_msgs::assignTask::Request &req,
-                  tgrip_taskMng_msgs::assignTask::Response &res ){
+bool tgrip::taskManager::tskMngSrvCB( tgrip_taskMng_msgs::serviceQuery::Request &req,
+                  tgrip_taskMng_msgs::serviceQuery::Response &res ){
+
 
   // switch between all sorts of tasks
   // in case tskTimedPatrolAction is requested:
-  init(req);
-  tskTimedPatrolASPtr.reset( new tskTimedPatrolActionServer(nh, "tskTimedPatrolActionServer", false) );
-  tskTimedPatrolASPtr->registerGoalCallback( boost::bind( tgrip_taskMng_server::tskTimedPatrolGoalCB() ));
-  tskTimedPatrolASPtr->start();
 
-  // in case tskMeteredPatrolAction is requested:
-  init(req);
-  tskMeteredPatrolASPtr.reset( new tskMeteredPatrolActionServer(nh, "tskMeteredPatrolActionServer", false) );
-  tskMeteredPatrolASPtr->registerGoalCallback( boost::bind( tgrip_taskMng_server::tskMeteredPatrolGoalCB() ));
-  tskMeteredPatrolASPtr->start();
+  if (req.queryCode == 3)  {
+    tskTimedPatrolASPtr.reset( new tskTimedPatrolActionServer(nh, "tskTimedPatrolActionServer", false) );
+    tskTimedPatrolASPtr->registerGoalCallback( boost::bind( tgrip::taskManager::tskTimedPatrolGoalCB ) );
+    tskTimedPatrolASPtr->start();
+  }
 
-  // in case tskMappingAction is requested:
-  init(req);
-  tskMappingASPtr.reset( new tskMappingActionServer(nh, "tskMappingActionServer", false) );
-  tskMappingASPtr->registerGoalCallback( boost::bind( tgrip_taskMng_server::tskMappingGoalCB() ));
-  tskMappingASPtr->start();
+  // // in case tskMeteredPatrolAction is requested:
+  // tskMeteredPatrolASPtr.reset( new tskMeteredPatrolActionServer(nh, "tskMeteredPatrolActionServer", false) );
+  // tskMeteredPatrolASPtr->registerGoalCallback( boost::bind( tgrip::taskManager::tskMeteredPatrolGoalCB() ));
+  // tskMeteredPatrolASPtr->start();
+
+  // // in case tskMappingAction is requested:
+  // tskMappingASPtr.reset( new tskMappingActionServer(nh, "tskMappingActionServer", false) );
+  // tskMappingASPtr->registerGoalCallback( boost::bind( tgrip::taskManager::tskMappingGoalCB() ));
+  // tskMappingASPtr->start();
   
-  // in case tskFetchingAction is requested:
-  init(req);
-  tskFetchingASPtr.reset( new tskFetchingActionServer(nh, "tskFetchingActionServer", false) );
-  tskFetchingASPtr->registerGoalCallback( boost::bind( tgrip_taskMng_server::tskFetchingGoalCB() ));
-  tskFetchingASPtr->start();
+  // // in case tskFetchingAction is requested:
+  // tskFetchingASPtr.reset( new tskFetchingActionServer(nh, "tskFetchingActionServer", false) );
+  // tskFetchingASPtr->registerGoalCallback( boost::bind( tgrip::taskManager::tskFetchingGoalCB() ));
+  // tskFetchingASPtr->start();
 
 }
 
 
-void tgrip_taskMng_server::tskTimedPatrolGoalCB(){
+void tgrip::taskManager::tskTimedPatrolGoalCB(){
   // 1. tskGlobalNavigation()
   /*Call [Nav], from its base, start exploring. 
     Random walking is the bottom line, but I'll try to be inclusive. (Use AR tags)
     While [Nav] is doing global exploring, call [CV] once in a while to find target boxes.
-         2.a In case [CV] founds a target but not very sure, return a pose. 
+         1.a In case [CV] founds a target but not very sure, return a pose. 
               Send that 2D pose to [Nav] and [Nav] will record it  (hereby known as "uncertain" pose) 
               and check later.
-         2.b In case [CV] founds a target and is sure, return a pose. 
+         1.b In case [CV] founds a target and is sure, return a pose. 
               Send that pose to [Nav]. [Nav] will pasue the exploration, 
               and start a go-pick-go-place subTask immediately. 
               Check this pose against the saved "uncertain" poses. 
               If the pose is within R =20 cm radius of any "uncertain" poses, delete that "uncertain" pose.
-         2.c In case [CV] founds nothing. 
+         1.c In case [CV] founds nothing. 
             Continue global exploration until one of the exit conditions is satisfied.
     */
-  // 2. tskLocalManeuver()
+
+  // 2. go_pick_go_place()
+  // 2.1 tskLocalManeuver()
    	    // Record the current location. 
         // Call [Nav] to go to the target location.
         // If [Nav] reported Goal Reached, Call [CV] to check if target can still be found. 
@@ -66,7 +69,7 @@ void tgrip_taskMng_server::tskTimedPatrolGoalCB(){
         // If within, Call [Manip] to start picking. 
         // If still not found, abandoned the task. 
 
-  // 3. tskLocalManipulation(); 
+  // 2.2. tskLocalManipulation(); 
       // do the picking.
       // If succeeded, Call [Nav] to return to base and do a similar reverse placing
       // Call [Nav] to return to the original "current location" at the beginning.	
@@ -78,14 +81,14 @@ void tgrip_taskMng_server::tskTimedPatrolGoalCB(){
 
 
 
-void tgrip_taskMng_server::tskMeteredPatrolGoalCB(){
+void tgrip::taskManager::tskMeteredPatrolGoalCB(){
   // very similar to tskTimedPatrolGoalCB, difference is merely the termination condition
 };
 
-void tgrip_taskMng_server::tskMeteredPatrolGoalCB(){};
+void tgrip::taskManager::tskMeteredPatrolGoalCB(){};
 
 
-void tgrip_taskMng_server::tskFetchingGoalCB(){
+void tgrip::taskManager::tskFetchingGoalCB(){
   std::cout << "taskMngServer::goalCB" << std::endl;
   goal = *(as->acceptNewGoal());
   std::cout << "New Goal Received:  ("<< goal.goal.poseGoal.x << ", "
@@ -159,7 +162,7 @@ void tgrip_taskMng_server::tskFetchingGoalCB(){
 };
 
 
-void tgrip_taskMng_server::odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsgPtr){
+void tgrip::taskManager::odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsgPtr){
   // convert the Odometry into Pose2D
   tf::Quaternion q( odomMsgPtr->pose.pose.orientation.x,
                     odomMsgPtr->pose.pose.orientation.y,

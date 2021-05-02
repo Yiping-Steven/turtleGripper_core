@@ -1,0 +1,5 @@
+tgrip_taskMng_msgs/tskManageGoal goal
+---
+tgrip_taskMng_msgs/tskManageResult result
+---
+tgrip_taskMng_msgs/tskManageFeedback feedback

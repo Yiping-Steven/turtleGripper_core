@@ -1,0 +1,3 @@
+string queryStr # the status of interest
+---
+string replyStr # to the specific status of the query, or can be a briefing report of all status
