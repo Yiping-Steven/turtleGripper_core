@@ -2,6 +2,16 @@
 A household robot that is eventually going to pick up socks on the floor for you. 
 Let's go for it!
 
+# Dependencies
+0. ROS
+sudo apt install ros-kinetic-full-desktop
+
+1. LIDAR driver
+sudo apt install ros-kinetic-urg-*
+
+2. turtlebot driver
+sudo apt install ros-kinetic-turtlebot-bringup
+
 ## Basic Rules to follow:
 
 ### 1. Maintain the architecture
