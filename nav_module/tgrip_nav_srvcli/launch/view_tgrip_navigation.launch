@@ -2,4 +2,4 @@
   Used for visualising the turtlebot while building a map or navigating with the ros navistack.
  -->
 <launch>
-  <node name="rviz" pkg="rviz" type="rviz" args="-d ../rviz/tgrip_nav.rviz"/> </launch>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find tgrip_nav_srvcli)/rviz/tgrip_nav.rviz"/> </launch>
