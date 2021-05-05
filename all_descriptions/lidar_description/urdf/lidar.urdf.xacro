@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<robot name="sensor_kinect" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="parent" value="plate_top_link" />
+
+  <xacro:include filename="$(find lidar_description)/urdf/lidar.xacro" />
+
+  <xacro:include filename="$(find lidar_description)/urdf/gazebo.xacro">
+
+  <xacro:gazebo_plg parent="${parent}">
+  </xacro:gazebo_plut>
+
+</robot>

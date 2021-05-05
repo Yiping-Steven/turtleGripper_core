@@ -1,0 +1,17 @@
+<?xml version="1.0">
+<robot name="hokuyo_lidar">
+    <link name="base_laser">
+        <visual>
+            <geometry>
+                <mesh filename="package://lidar_description/meshes/hokuyo.dae"/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <geometry>
+                <mesh filename="package://lidar_description/meshes/hokuyo.dae"/>
+            </geometry>
+        </collision>
+    </link>
+</robot>
+

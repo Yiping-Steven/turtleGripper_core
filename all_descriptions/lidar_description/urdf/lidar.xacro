@@ -1,0 +1,37 @@
+<robot name = "lidar_sensor" xmlns:xacro="http://www.ros.org/wiki/xacro">
+        
+    <xacro:property name="displaceX" value="0.0" />  
+    <xacro:property name="displaceY" value="0.0" />    
+
+    <xacro:property name="name"  value="sonar" />
+    <xacro:property name="parent"  value="base_link" />
+
+    <xacro:macro name="lidar">
+        
+        <link name="base_link">
+            <visual>
+               <origin xyz="${displaceX} ${displaceY} 0" rpy="0 0 0"/>
+                <geometryj> 
+                    <mesh filename="package://lidar_description/meshes/hokuyo.dae" />
+                </geometry>
+
+                <!-- <material name="Blue">
+                    <color rgba="0 0.0 1.0 0.5"/>
+                </material> -->
+            </visual>
+            
+            <collision>
+               <origin xyz="${displaceX} ${displaceY} 0" rpy="0 0 0"/>
+                <geometryj> 
+                    <mesh filename="package://lidar_description/meshes/hokuyo.dae" />
+                </geometry>
+            </collision>
+            <!-- <inertial>
+                <origin xyz="0 0 ${0.5*body_height}" rpy="0 0 0"/>
+                <mass value="0.180"/>
+                <inertia ixx="6.0e-4" ixy="0" ixz="0" iyy="6.0e-4" iyz="0" izz="6.0e-4"/>
+            </inertial> -->
+        </link>
+    </xacro:macro>
+
+</robot>
