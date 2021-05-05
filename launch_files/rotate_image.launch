@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!--Launch the node to rotate the image --> 
+
+<launch>
+  <node pkg="image_rotate" type="image_rotate" name="image_rotator"
+      args="image:=camera/rgb/image_raw rotated/image:=camera/rgb/image_raw_rotated __name:=image_rotater _source_x:=-10 _source_y=0"/>
+</launch>
