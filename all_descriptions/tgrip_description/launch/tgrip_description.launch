@@ -12,7 +12,7 @@
     name="joint_state_publisher"
     pkg="joint_state_publisher"
     type="joint_state_publisher">
-    <param name="use_gui" value="true"/>
+    <param name="use_gui" value="false"/>
   </node>
 
   <!-- start robot state publisher -->
@@ -23,7 +23,7 @@
       output="screen" >
   </node>
 
-  <node name="rviz" pkg="rviz" type="rviz" required="true" />
+  <!-- <node name="rviz" pkg="rviz" type="rviz" required="true" /> -->
 
   
 </launch>
