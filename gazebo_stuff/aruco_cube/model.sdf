@@ -1,8 +1,8 @@
 <?xml version='1.0'?>
 <sdf version="1.5">
   <model name="my_model">
-    <pose>0 0 0.5 0 0 0</pose>
-    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <static>false</static>
     <link name="link">
       <inertial>
 	<mass>0.01</mass>
@@ -18,9 +18,9 @@
       </inertial>
       <collision name="collision">
 	<geometry>
-	  <box>
-	    <size>0.056 0.056 0.056</size>
-	  </box>
+	  <mesh>
+	    <uri>model://aruco_cube/meshes/aruco_cube.dae</uri>
+	  </mesh>
 	</geometry>
       </collision>
       <visual name="visual">
