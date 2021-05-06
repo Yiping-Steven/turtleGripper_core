@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="sim" default="false"/>
+  <arg name="usb_port" default="/dev/ttyUSB0" />
+  <arg name="baud_rate"    default="1000000"/>
+  <arg name="control_period"         default="0.010"/>
+  <arg name="use_platform"           default="true"/>
+
+
+  <!-- startup open manipulator with moveit-->
+    <include file="$(find om_test)/launch/all.launch">
+      <arg name="sim" value="$(arg sim)"/>
+    </include> 
+
+ <!--
+<arg name="node_start_delay" default="5.0" />  
+<node name="listener" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
+ move to start postion
+  <node name="move_to_start" pkg="om_test" type="move_p" output="screen"/>-->
+
+   <node name="server_node" pkg="tgrip_manip_srvcli" type="server_node" 
+   output="screen">
+   </node>
+ 
+
+</launch>
