@@ -1,6 +1,6 @@
 <launch>
   <arg name="use_map_topic"   default="false"/>
-  <arg name="scan_topic"      default="scan"/> 
+  <arg name="scan_topic"      default="scan_kinect"/> 
   <arg name="initial_pose_x"  default="0.0"/>
   <arg name="initial_pose_y"  default="0.0"/>
   <arg name="initial_pose_a"  default="0.0"/>
@@ -47,6 +47,6 @@
     <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>
     <param name="initial_pose_y"            value="$(arg initial_pose_y)"/>
     <param name="initial_pose_a"            value="$(arg initial_pose_a)"/>
-    <remap from="scan"                      to="$(arg scan_topic)"/>
+    <remap from="scan_kinect"                      to="$(arg scan_topic)"/>
   </node>
 </launch>
