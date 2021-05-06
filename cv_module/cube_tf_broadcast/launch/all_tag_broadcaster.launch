@@ -1,0 +1,27 @@
+<?xml version="1.5"?>
+
+<launch>
+
+
+  <arg name="world_name" default="base_link"/>
+
+  <include file = "$(find marker_tf_broadcast)/launch/aruco_marker_finder.launch">
+  </include>
+  
+  
+  <include file = "$(find cube_tf_broadcast)/launch/cube_marker_broadcaster.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="marker_name" value="aruco_single_0"/>
+  </include>
+
+  <include file = "$(find cube_tf_broadcast)/launch/cube_marker_broadcaster.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="marker_name" value="aruco_single_1"/>
+  </include>
+
+  
+  <include file = "$(find cube_tf_broadcast)/launch/cube_marker_broadcaster.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="marker_name" value="aruco_single_2"/>
+  </include>
+</launch>
