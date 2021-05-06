@@ -30,4 +30,8 @@
     <arg name="battery" value="$(arg battery)" />
   </include>
 
+
+  <!-- CV module -->
+  <include fule="$(find cube_tf_broadcast)/launch/all_tag_broadcaster.launch"/>
+
 </launch>
