@@ -34,6 +34,6 @@
   <workspace parent="base_link"/>
 
   <stack_hexagons parent="base_link"/>  
-  <!-- <kobuki/> -->
+  <kobuki/>
    
 </robot>
