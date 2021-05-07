@@ -1,0 +1,5 @@
+tgrip_manip_msgs/goal goal
+---
+tgrip_manip_msgs/result result
+---
+tgrip_manip_msgs/feedback feedback_code
