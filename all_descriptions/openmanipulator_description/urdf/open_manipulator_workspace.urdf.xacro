@@ -8,7 +8,7 @@
       <visual>
         <origin xyz="0.18 0.2 0" rpy="0 0 ${-pi/2}"/>
         <geometry>
-          <mesh filename="package://om_test/urdf/work_space.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://openmanipulator_description/mesh/work_space.stl" scale="0.001 0.001 0.001"/>
         </geometry>
         <material name="grey"/>
       </visual>
@@ -16,7 +16,7 @@
       <collision>
         <origin xyz="0.18 0.2 0" rpy="0 0 ${-pi/2}"/>
         <geometry>
-          <mesh filename="package://om_test/urdf/work_space.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://openmanipulator_description/mesh/work_space.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
 
