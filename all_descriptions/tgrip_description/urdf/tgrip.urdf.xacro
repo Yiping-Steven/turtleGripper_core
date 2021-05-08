@@ -8,11 +8,7 @@
   <xacro:include filename="$(find kinect_description)/urdf/kinect.urdf.xacro"/>
   <xacro:include filename="$(find lidar_description)/urdf/hokuyo.urdf.xacro"/>
   <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
-
-
-
-
-
+  
   <!--stack_hexagons parent="base_footprint"/-->
 
 
