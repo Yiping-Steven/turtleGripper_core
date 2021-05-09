@@ -1,0 +1,230 @@
+[global_config]
+  enabled_plugins = InactivityWatch, CustomCommandsMenu, TestPlugin, ActivityWatch, TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, Logger, MavenPluginURLHandler, LaunchpadBugURLHandler
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      command = ""
+      directory = /home/tgrip/dev/tgrip_ws/
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+  [[tgrip_mapping]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = 58a0493a-d1cc-4b45-b516-84ebcd3c63da
+      last_active_window = True
+      maximised = False
+      order = 0
+      parent = ""
+      position = 1452:694
+      size = 642, 350
+      title = tgrip@tgrip-ThinkPad-Yoga-260:~
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      position = 148
+      ratio = 0.235202492212
+      type = HPaned
+    [[[child10]]]
+      order = 0
+      parent = child9
+      position = 241
+      ratio = 0.5
+      type = HPaned
+    [[[child2]]]
+      order = 0
+      parent = child1
+      position = 61
+      ratio = 0.182857142857
+      type = VPaned
+    [[[child4]]]
+      order = 1
+      parent = child2
+      position = 86
+      ratio = 0.314487632509
+      type = VPaned
+    [[[child6]]]
+      order = 1
+      parent = child4
+      position = 100
+      ratio = 0.539267015707
+      type = VPaned
+    [[[child9]]]
+      order = 1
+      parent = child1
+      position = 172
+      ratio = 0.5
+      type = VPaned
+    [[[terminal11]]]
+      command = "echo please start the action client; source devel/setup.zsh; sleep 1; "
+      directory = /home/tgrip/dev/tgrip_ws/
+      order = 0
+      parent = child10
+      profile = default
+      type = Terminal
+      uuid = cc7df8a7-b6c7-4d0b-b4c4-e6817069dd65
+    [[[terminal12]]]
+      command = " source ~/.zshrc; sleep 1; roslaunch turtlebot_teleop keyboard_teleop.launch"
+      directory = "/home/tgrip/dev/tgrip_ws "
+      order = 1
+      parent = child10
+      profile = default
+      type = Terminal
+      uuid = a19bdd23-8ab7-41c8-8847-78b5c12325f9
+    [[[terminal13]]]
+      command = source ~/.zshrc; sleep 3; roslaunch tgrip_nav_srvcli gmapping_demo.launch
+      directory = /home/tgrip/dev/tgrip_ws
+      order = 1
+      parent = child9
+      profile = default
+      type = Terminal
+      uuid = 58a0493a-d1cc-4b45-b516-84ebcd3c63da
+    [[[terminal3]]]
+      command = source ~/.zshrc; echo roscore
+      directory = /home/tgrip
+      order = 0
+      parent = child2
+      profile = default
+      type = Terminal
+      uuid = a6fdf2c3-de32-4946-b0c3-c3d458b8e451
+    [[[terminal5]]]
+      command = source devel/setup.zsh; sleep 1; echo roslaunch tgrip_nav_srvcli minimal.launch
+      directory = /home/tgrip/dev/tgrip_ws
+      order = 0
+      parent = child4
+      profile = default
+      type = Terminal
+      uuid = f3c9fdd6-0c80-4981-a648-862529c060b4
+    [[[terminal7]]]
+      command = source devel/setup.zsh; sleep 1; roslaunch tgrip_description tgrip_description.launch
+      directory = /home/tgrip/dev/tgrip_ws
+      order = 0
+      parent = child6
+      profile = default
+      type = Terminal
+      uuid = 3c1ede45-51c8-42bf-b149-173bf4ff43d6
+    [[[terminal8]]]
+      command = source ~/.zshrc; sleep 1; rosrun urg_node urg_node _ip_address:=192.168.0.10
+      directory = ""
+      order = 1
+      parent = child6
+      profile = default
+      type = Terminal
+      uuid = 2404f76a-f443-49ed-bcfa-1ab8186749b2
+  [[tgrip_realNav]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = 58a0493a-d1cc-4b45-b516-84ebcd3c63da
+      last_active_window = True
+      maximised = False
+      order = 0
+      parent = ""
+      position = 1452:694
+      size = 642, 350
+      title = tgrip@tgrip-ThinkPad-Yoga-260:~
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      position = 148
+      ratio = 0.235202492212
+      type = HPaned
+    [[[child10]]]
+      order = 0
+      parent = child9
+      position = 241
+      ratio = 0.5
+      type = HPaned
+    [[[child2]]]
+      order = 0
+      parent = child1
+      position = 61
+      ratio = 0.182857142857
+      type = VPaned
+    [[[child4]]]
+      order = 1
+      parent = child2
+      position = 86
+      ratio = 0.314487632509
+      type = VPaned
+    [[[child6]]]
+      order = 1
+      parent = child4
+      position = 100
+      ratio = 0.539267015707
+      type = VPaned
+    [[[child9]]]
+      order = 1
+      parent = child1
+      position = 172
+      ratio = 0.5
+      type = VPaned
+    [[[terminal11]]]
+      command = "echo please start the action client; source devel/setup.zsh; sleep 1; "
+      directory = /home/tgrip/dev/tgrip_ws/
+      order = 0
+      parent = child10
+      profile = default
+      type = Terminal
+      uuid = cc7df8a7-b6c7-4d0b-b4c4-e6817069dd65
+    [[[terminal12]]]
+      command = " source ~/.zshrc; sleep 1; roslaunch turtlebot_teleop keyboard_teleop.launch"
+      directory = "/home/tgrip/dev/tgrip_ws "
+      order = 1
+      parent = child10
+      profile = default
+      type = Terminal
+      uuid = a19bdd23-8ab7-41c8-8847-78b5c12325f9
+    [[[terminal13]]]
+      command = source ~/.zshrc; sleep 3; roslaunch tgrip_nav_srvcli amcl_demo.launch
+      directory = /home/tgrip/dev/tgrip_ws
+      order = 1
+      parent = child9
+      profile = default
+      type = Terminal
+      uuid = 58a0493a-d1cc-4b45-b516-84ebcd3c63da
+    [[[terminal3]]]
+      command = source ~/.zshrc; echo roscore
+      directory = /home/tgrip
+      order = 0
+      parent = child2
+      profile = default
+      type = Terminal
+      uuid = a6fdf2c3-de32-4946-b0c3-c3d458b8e451
+    [[[terminal5]]]
+      command = source devel/setup.zsh; sleep 1; echo roslaunch tgrip_nav_srvcli minimal.launch
+      directory = /home/tgrip/dev/tgrip_ws
+      order = 0
+      parent = child4
+      profile = default
+      type = Terminal
+      uuid = f3c9fdd6-0c80-4981-a648-862529c060b4
+    [[[terminal7]]]
+      command = source devel/setup.zsh; sleep 1; roslaunch tgrip_description tgrip_description.launch
+      directory = /home/tgrip/dev/tgrip_ws
+      order = 0
+      parent = child6
+      profile = default
+      type = Terminal
+      uuid = 3c1ede45-51c8-42bf-b149-173bf4ff43d6
+    [[[terminal8]]]
+      command = source ~/.zshrc; sleep 1; rosrun urg_node urg_node _ip_address:=192.168.0.10
+      directory = ""
+      order = 1
+      parent = child6
+      profile = default
+      type = Terminal
+      uuid = 2404f76a-f443-49ed-bcfa-1ab8186749b2
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.8
+    background_image = None
+    background_type = transparent
+    exit_action = hold
+    login_shell = True

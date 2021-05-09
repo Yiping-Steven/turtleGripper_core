@@ -12,6 +12,9 @@ sudo apt install ros-kinetic-urg-*
 2. turtlebot driver
 sudo apt install ros-kinetic-turtlebot-bringup
 
+3. OM packages
+git clone https://github.com/ROBOTIS-GIT/open_manipulator.git
+
 ## Basic Rules to follow:
 
 ### 1. Maintain the architecture

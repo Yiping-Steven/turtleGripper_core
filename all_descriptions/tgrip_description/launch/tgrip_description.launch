@@ -23,7 +23,7 @@
       output="screen" >
   </node>
 
-  <!-- <node name="rviz" pkg="rviz" type="rviz" required="true" /> -->
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find tgrip_description)/rviz/view_model.rviz" />
 
   
 </launch>
