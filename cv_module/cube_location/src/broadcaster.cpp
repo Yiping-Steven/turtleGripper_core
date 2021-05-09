@@ -25,20 +25,19 @@ int main( int argc, char** argv ){
   std::cout<<"Cube position advertised"<<std::endl;
   
   
-  std::vector<double> res {0.0 ,0.0, 0.0};
   std::deque<std::vector<double>> cubeVec;
-  std::cout<<"Deque created empty:"<<std::endl;
-  //  std::cout<<cubeVec.empty()<<std::endl;
-  
+  std::cout<<"Deque created empty:"<<std::endl;  
   
   while (nh.ok()){
     
     std::cout<<"Publisher running"<<std::endl;
 
     geometry_msgs::Point cube_pose;
-
+    std::cout<< cubeVec.size()<<std::endl;
+    std::vector<double> res {0.0 ,0.0, 0.0};
     //If the length of deque less than 5, return nans
     if (cubeVec.size() < 5) {
+      
       //Assign nan to the response
       for (int i=0; i<res.size(); i++){
 	res[i] = nanf("");
@@ -50,6 +49,7 @@ int main( int argc, char** argv ){
       for (int i = 0; i < cubeVec.size(); i++) {
         for (int k = 0; i<3; i++) {
     	  res[k] = res[k] + cubeVec[i][k];
+	  std::cout<<res[k]<<std::endl;
 	} 
       }
     }
@@ -59,7 +59,6 @@ int main( int argc, char** argv ){
     cube_pose.y = res[1];
     cube_pose.z = res[2];    
     cube_publisher.publish(cube_pose);
-    //std::cout<<"Cube pose"<<cube_pose.x<<cube_pose.y<<cube_pose.z<<std::cout;
     
     // Add things to the deque
     std::cout<<"Waiting for the transform"<<std::endl;
