@@ -47,10 +47,10 @@ int main( int argc, char** argv ){
 
       //Get the Average Position from the vector
       for (int i = 0; i < cubeVec.size(); i++) {
-        for (int k = 0; i<3; i++) {
+        for (int k = 0; k < res.size(); k++) {
     	  res[k] = res[k] + cubeVec[i][k];
-	  std::cout<<res[k]<<std::endl;
-	} 
+	}
+	//	std::cout<<res[k]<<std::endl;
       }
     }
 
@@ -59,12 +59,20 @@ int main( int argc, char** argv ){
     cube_pose.y = res[1];
     cube_pose.z = res[2];    
     cube_publisher.publish(cube_pose);
-    
-    // Add things to the deque
+    std::cout<<cube_pose.x<<cube_pose.y<<cube_pose.z<<std::endl;
+    std::cout<<res[0]<<res[1]<<res[2]<<std::endl;
+    // Get the transform from map to cube
     std::cout<<"Waiting for the transform"<<std::endl;
-    ros::Time now=ros::Time(0);
-    listener.waitForTransform( world_name, "/cube", now, ros::Duration(1.0));
-    listener.lookupTransform( world_name, "/cube", now, transform);
+    try{
+      ros::Time now=ros::Time(0);
+      listener.waitForTransform( world_name, "/cube", now, ros::Duration(20.0));
+      listener.lookupTransform( world_name, "/cube", now, transform);
+    }
+    catch (tf::TransformException ex){
+      ROS_ERROR("%s",ex.what());
+    }
+    
+    // Add position from the transform to deque
     std::vector<double> cube_vec {transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z()};
     cubeVec.push_back(cube_vec);
     std::cout<<"New vector acquired"<<std::endl;
