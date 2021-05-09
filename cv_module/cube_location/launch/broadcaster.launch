@@ -4,7 +4,7 @@
   <arg name="world_name" default="map"/>
   <node
     pkg = "cube_location"
-    type = "service_node"
+    type = "publisher_node"
     name = "cube_loc_broadcaster"
     output = "screen">    
     <param name = "world_name" value = "$(arg world_name)" />
