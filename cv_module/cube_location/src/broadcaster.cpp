@@ -63,8 +63,9 @@ int main( int argc, char** argv ){
     
     // Add things to the deque
     std::cout<<"Waiting for the transform"<<std::endl;
-    listener.waitForTransform( world_name, "/cube", ros::Time::now(), ros::Duration(1.0));
-    listener.lookupTransform( world_name, "/cube", ros::Time::now(), transform);
+    ros::Time now=ros::Time::now();
+    listener.waitForTransform( world_name, "/cube", now, ros::Duration(1.0));
+    listener.lookupTransform( world_name, "/cube", now, transform);
     std::vector<double> cube_vec {transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z()};
     cubeVec.push_back(cube_vec);
     std::cout<<"New vector acquired"<<std::endl;
