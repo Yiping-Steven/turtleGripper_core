@@ -32,6 +32,6 @@
 
 
   <!-- CV module -->
-  <include fule="$(find cube_tf_broadcast)/launch/all_tag_broadcaster.launch"/>
+  <!-- <include file="$(find cube_tf_broadcast)/launch/all_tag_broadcaster.launch"/> -->
 
 </launch>
