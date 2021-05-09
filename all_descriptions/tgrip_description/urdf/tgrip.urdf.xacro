@@ -5,9 +5,10 @@
   <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
   <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons.urdf.xacro"/>
   <xacro:include filename="$(find turtlebot_description)/urdf/sensors/kinect.urdf.xacro"/>
-  <xacro:include filename="$(find kinect_description)/urdf/kinect.urdf.xacro"/>
-  <xacro:include filename="$(find lidar_description)/urdf/hokuyo.urdf.xacro"/>
   <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
+  <xacro:include filename="$(find kinect_description)/urdf/kinect.urdf.xacro"/>
+  <xacro:include filename="$(find lidar_description)/urdf/hokuyo.gazebo"/>
+  <xacro:include filename="$(find lidar_description)/urdf/hokuyo.urdf.xacro"/>
   
   <!--stack_hexagons parent="base_footprint"/-->
 

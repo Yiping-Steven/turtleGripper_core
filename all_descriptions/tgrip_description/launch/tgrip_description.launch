@@ -25,5 +25,8 @@
 
   <!--node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find tgrip_description)/rviz/view_model.rviz" /-->
 
+  <!-- to rotate the kinect image back to normal -->
+  <node pkg="image_rotate" type="image_rotate" name="image_rotator"
+      args="image:=camera/rgb/image_raw rotated/image:=camera/rgb/image_raw_rotated __name:=image_rotater _source_x:=-10 _source_y=0"/>
   
 </launch>

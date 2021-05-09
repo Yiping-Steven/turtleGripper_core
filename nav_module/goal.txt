@@ -1,0 +1,37 @@
+Goal 1: 
+header: 
+  seq: 7
+  stamp: 
+    secs: 1185
+    nsecs:  50000000
+  frame_id: "map"
+pose: 
+  position: 
+    x: 9.49607086182
+    y: 1.45768642426
+    z: 0.0
+  orientation: 
+    x: 0.0
+    y: 0.0
+    z: 0.746534143978
+    w: 0.66534710631
+
+
+Goal 2:
+header: 
+  seq: 8
+  stamp: 
+    secs: 1227
+    nsecs:  10000000
+  frame_id: "map"
+pose: 
+  position: 
+    x: -1.11353111267
+    y: 1.71167802811
+    z: 0.0
+  orientation: 
+    x: 0.0
+    y: 0.0
+    z: 0.9986945408
+    w: 0.0510804676668
+---

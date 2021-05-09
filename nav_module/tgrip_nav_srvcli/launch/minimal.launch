@@ -19,10 +19,6 @@
     <arg name="serialport" value="$(arg serialport)" />
   </include>
 
-<!-- we added this to rotate the image according to the orientation the kinect is mounted. -->
-  <node pkg="image_rotate" type="image_rotate" name="image_rotator"
-      args="image:=camera/rgb/image_raw rotated/image:=camera/rgb/image_raw_rotated __name:=image_rotater _source_x:=-10 _source_y=0"/>
-
   <node pkg="urg_node" type="urg_node" name="hokuyo_lidar"
       args="_ip_address:=192.168.0.10"/>
       

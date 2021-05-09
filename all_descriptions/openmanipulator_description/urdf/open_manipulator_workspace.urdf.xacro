@@ -13,13 +13,6 @@
         <material name="grey"/>
       </visual>
 
-      <collision>
-        <origin xyz="0.18 0.2 0" rpy="0 0 ${-pi/2}"/>
-        <geometry>
-          <mesh filename="package://openmanipulator_description/mesh/work_space.stl" scale="0.001 0.001 0.001"/>
-        </geometry>
-      </collision>
-
       <inertial>
         <origin xyz="3.0876154e-04 0.0000000e+00 -1.2176461e-04" />
         <mass value="7.9119962e-02" />
