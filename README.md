@@ -1,6 +1,6 @@
 # TurtleGripper
-A mobile manipulator robot designed for household usage. It is going to pick up socks on the floor for you, eventually.
-
+A mobile manipulator robot designed for household usage.
+Let's realize the dream of throwing your socks freely!
 
 # A. Installation
 
