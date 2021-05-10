@@ -1,6 +1,5 @@
 # turtleGripper
-A household robot that is eventually going to pick up socks on the floor for you. 
-Let's go for it!
+A mobile manipulator robot designed for household usage. It is going to pick up socks on the floor for you, eventually.
 
 # Dependencies
 0. ROS
