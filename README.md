@@ -1,6 +1,6 @@
 # TurtleGripper
 A mobile manipulator robot designed for household usage.
-Let's realize the dream of throwing your socks freely!
+Let's realize the dream of throwing your socks freeeeeely!
 
 # A. Installation
 
