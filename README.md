@@ -1,6 +1,8 @@
 # TurtleGripper
 A mobile manipulator robot designed for household usage.
 Let's realize the dream of throwing your socks freeeeeely!
+Originated from a course project of Robot System Programming by [Simon Leonard](https://www.cs.jhu.edu/~sleonard/) @ LCSR, WSE, JHU.
+Student: Yiping Zheng, Irina Bataeva, Jian Kwon
 
 # A. Installation
 
