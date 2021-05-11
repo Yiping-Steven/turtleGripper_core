@@ -12,7 +12,7 @@
     name="joint_state_publisher"
     pkg="joint_state_publisher"
     type="joint_state_publisher">
-    <param name="use_gui" value="false"/>
+    <param name="use_gui" value="true"/>
   </node>
 
   <!-- start robot state publisher -->
