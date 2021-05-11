@@ -3,12 +3,12 @@
 <robot name="tgrip" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
-  <xacro:include filename="$(find openmanipulator_description)/urdf/hexagons.urdf.xacro"/>
   <xacro:include filename="$(find turtlebot_description)/urdf/sensors/kinect.urdf.xacro"/>
   <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
   <xacro:include filename="$(find kinect_description)/urdf/kinect.urdf.xacro"/>
   <xacro:include filename="$(find lidar_description)/urdf/hokuyo.gazebo"/>
   <xacro:include filename="$(find lidar_description)/urdf/hokuyo.urdf.xacro"/>
+  <xacro:include filename="$(find openmanipulator_description)/urdf/hexagons.urdf.xacro"/>
   
   <!-- Import manip -->
   <!-- Import Rviz colors -->
@@ -22,7 +22,7 @@
   <!-- World fixed joint-->
   <joint name="fix_world" type="fixed">
     <origin xyz="0.16 -0.08 0.17" rpy="0 0 ${-pi/2}"/>
-    <parent link="base_link"/>
+    <parent link="base_footprint"/>
     <child link="link1"/>
   </joint>
   <!-- Import manip -->
@@ -41,17 +41,37 @@
   <stack_hexagons parent="base_link"/>  
   <kobuki/>
 
-  <!-- <link name="kinect_adjust_link"/>
-  <joint name="kinect_adjust" type="floating">
+<!--  <link name="kinect_adjust_link_2"/>
+  <joint name="kinect_adjust_2" type="continuous">
     <origin xyz="0 0 0" rpy="0 0 0"/>
-    <parent link="base_footprint"/>
-    <child link="kinect_adjust_link"/>
-   <limit effort="10" lower="-0.2" upper="0.2"/>
-  </joint> -->
+    <axis xyz="0 1 0"/>
+    <parent link="kinect_adjust_link_1"/>
+    <child link="kinect_adjust_link_2"/>
+    <limit velocity="1.0" effort="10" lower="-0.2" upper="0.2"/>
+  </joint> 
+  
+  <link name="kinect_adjust_link_1"/>
+  <joint name="kinect_adjust_1" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <parent link="kinect_adjust_link_0"/>
+    <child link="kinect_adjust_link_1"/>
+    <limit velocity="1.0" effort="10" lower="-0.2" upper="0.2"/>
+  </joint>
+  
+  <link name="kinect_adjust_link_0"/>
+  <joint name="kinect_adjust_0" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <parent link="base_link"/>
+    <child link="kinect_adjust_link_0"/>
+    <limit velocity="1.0" effort="10" lower="-0.2" upper="0.2"/>
+  </joint>
+  -->
 
 
- <xacro:sensor_kinect parent="base_footprint" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/>
-  <!-- <xacro:sensor_kinect parent="kinect_adjust_link" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/>  -->
+<!--  <xacro:sensor_kinect parent="base_footprint" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/>-->
+  <xacro:sensor_kinect parent="base_link" cam_px="-0.015" cam_py="0.04" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/> 
   <xacro:sensor_hokuyo parent="plate_top_link"/>
 
    

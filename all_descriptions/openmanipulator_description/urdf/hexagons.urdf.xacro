@@ -106,9 +106,9 @@
     <link name="pole_kinect_${number}_link">
       <visual>
         <origin xyz="0 0 -0.01" rpy="0 0 0"/>
-        <geometry>
+        <!-- <geometry>
           <mesh filename="package://turtlebot_description/meshes/sensors/sensor_pole.dae" />
-        </geometry>
+        </geometry> -->
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -179,9 +179,9 @@
     <link name="plate_middle_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
-        <geometry>
-          <mesh filename="package://turtlebot_description/meshes/stacks/hexagons/plate_middle.dae"/>
-        </geometry>
+        <!-- <geometry> -->
+          <!-- <mesh filename="package://turtlebot_description/meshes/stacks/hexagons/plate_middle.dae"/> -->
+        <!-- </geometry> -->
       </visual>  
       <!-- <collision>
         <origin xyz="0.01364 0.0 0.0" rpy="0 0 0"/>

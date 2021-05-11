@@ -2,6 +2,14 @@
 A mobile manipulator robot designed for household usage.
 Let's realize the dream of throwing your socks freeeeeely!
 
+Originated from a course project of  **Robot System Programming**
+
+**Mentor**: [Simon Leonard](https://www.cs.jhu.edu/~sleonard/)
+
+**Student**: Yiping Zheng, Irina Bataeva, Jian Kwon
+
+@ LCSR, WSE, Johns Hopkins University.
+
 # A. Installation
 
   0. ROS is our preliminary requirement.
