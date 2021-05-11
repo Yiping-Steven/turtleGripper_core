@@ -37,16 +37,17 @@
   <stack_hexagons parent="base_link"/>  
   <kobuki/>
 
-  <!-- <link name="kinect_adjust_link"/>
+  <link name="kinect_adjust_link"/>
   <joint name="kinect_adjust" type="floating">
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <parent link="base_footprint"/>
     <child link="kinect_adjust_link"/>
-    <limit effort="10" lower="-0.2" upper="0.2"/>
-  </joint> -->
+  <!--  <limit effort="10" lower="-0.2" upper="0.2"/>-->
+  </joint>
 
-  <xacro:sensor_kinect parent="base_footprint" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/>
-  <!-- <xacro:sensor_kinect parent="kinect_adjust" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/> -->
+
+<!--  <xacro:sensor_kinect parent="base_footprint" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/>-->
+  <xacro:sensor_kinect parent="kinect_adjust" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/> 
   <xacro:sensor_hokuyo parent="plate_top_link"/>
 
    
