@@ -29,9 +29,9 @@
 
 
   <!-- Import work space -->
-  <!-- <xacro:include filename="$(find openmanipulator_description)/urdf/open_manipulator_workspace.urdf.xacro" /> -->
+  <xacro:include filename="$(find openmanipulator_description)/urdf/open_manipulator_workspace.urdf.xacro" />
   <!-- Workspace joint-->
-  <!-- <workspace parent="base_footprint"/> -->
+  <workspace parent="base_footprint"/>
   <!-- Import work space -->
 
   <stack_hexagons parent="base_link"/>  
