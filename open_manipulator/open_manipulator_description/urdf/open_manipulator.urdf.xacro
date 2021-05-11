@@ -19,9 +19,6 @@
       </geometry>
     </collision>
 
-  <!-- The regular expression "-?\d.\d{7}e-0[0-9]" -->
-
-
     <inertial>
       <origin xyz="3.0876154e-04 0.0000000e+00 -1.2176461e-04" />
       <mass value="7.9119962e-02" />
@@ -32,7 +29,7 @@
   </link>
 
   <!-- Joint 1 -->
-  <joint name="joint1" type="fixed">
+  <joint name="joint1" type="revolute">
     <parent link="link1"/>
     <child link="link2"/>
     <origin xyz="0.012 0.0 0.017" rpy="0 0 0"/>
@@ -67,7 +64,7 @@
   </link>
 
   <!--  Joint 2 -->
-  <joint name="joint2" type="fixed">
+  <joint name="joint2" type="revolute">
     <parent link="link2"/>
     <child link="link3"/>
     <origin xyz="0.0 0.0 0.0595" rpy="0 0 0"/>
@@ -102,7 +99,7 @@
   </link>
 
   <!--  Joint 3 -->
-  <joint name="joint3" type="fixed">
+  <joint name="joint3" type="revolute">
     <parent link="link3"/>
     <child link="link4"/>
     <origin xyz="0.024 0 0.128" rpy="0 0 0"/>
@@ -137,7 +134,7 @@
   </link>
 
   <!--  Joint 4 -->
-  <joint name="joint4" type="fixed">
+  <joint name="joint4" type="revolute">
     <parent link="link4"/>
     <child link="link5"/>
     <origin xyz="0.124 0.0 0.0" rpy="0 0 0"/>
@@ -172,7 +169,7 @@
   </link>
 
   <!--  Gripper joint -->
-  <joint name="gripper" type="fixed">
+  <joint name="gripper" type="prismatic">
     <parent link="link5"/>
     <child link="gripper_link"/>
     <origin xyz="0.0817 0.021 0.0" rpy="0 0 0"/>
@@ -207,7 +204,7 @@
   </link>
 
   <!--  Gripper joint sub -->
-  <joint name="gripper_sub" type="fixed">
+  <joint name="gripper_sub" type="prismatic">
     <parent link="link5"/>
     <child link="gripper_link_sub"/>
     <origin xyz="0.0817 -0.021 0" rpy="0 0 0"/>
@@ -250,7 +247,7 @@
   </joint>
 
   <!-- end effector link -->
-  <link name="end_effector_link">
+  <!-- <link name="end_effector_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -266,10 +263,10 @@
                iyy="1.0e-03" iyz="0.0"
                izz="1.0e-03" />
     </inertial>
-  </link>
+  </link> -->
 
-  <!-- Realsense Camera Joint Position
-  <joint name="camera_joint" type="fixed">
+  <!-- Realsense Camera Joint Position -->
+  <!-- <joint name="camera_joint" type="fixed">
     <axis xyz="0 1 0" />
     <origin xyz="0.070 0.032 0.052" rpy="0 0 0"/> 
     <parent link="link5"/>
