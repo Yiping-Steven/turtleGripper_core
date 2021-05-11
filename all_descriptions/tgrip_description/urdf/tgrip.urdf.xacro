@@ -37,17 +37,35 @@
   <stack_hexagons parent="base_link"/>  
   <kobuki/>
 
-  <link name="kinect_adjust_link"/>
-  <joint name="kinect_adjust" type="floating">
+  <link name="kinect_adjust_link_0"/>
+  <joint name="kinect_adjust" type="continuous">
     <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <parent link="kinect_adjust_link_1"/>
+    <child link="kinect_adjust_link_0"/>
+  </joint>
+  
+  <link name="kinect_adjust_link_1"/>
+  <joint name="kinect_adjust" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <parent link="kinect_adjust_link_2"/>
+    <child link="kinect_adjust_link_1"/>
+    <limit effort="10" lower="-0.2" upper="0.2"/>-->
+  </joint>
+  
+  <link name="kinect_adjust_link2"/>
+  <joint name="kinect_adjust" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
     <parent link="base_footprint"/>
-    <child link="kinect_adjust_link"/>
-  <!--  <limit effort="10" lower="-0.2" upper="0.2"/>-->
+    <child link="kinect_adjust_link2"/>
+    <limit effort="10" lower="-0.2" upper="0.2"/>-->
   </joint>
 
 
 <!--  <xacro:sensor_kinect parent="base_footprint" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/>-->
-  <xacro:sensor_kinect parent="kinect_adjust_link" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/> 
+  <xacro:sensor_kinect parent="kinect_adjust_link_0" cam_px="0.03" cam_pz="0.3" cam_or="3.14" cam_op="0.475" cam_oy="0"/> 
   <xacro:sensor_hokuyo parent="plate_top_link"/>
 
    
