@@ -34,9 +34,9 @@ client::client(ros::NodeHandle& nh): nh(nh){
 
     geometry_msgs::Pose pose;
 
-    pose.position.x = 0.4;
-    pose.position.y = -0.2;
-    pose.position.z = 0.0;
+    pose.position.x = 0.373;
+    pose.position.y = -0.004;
+    pose.position.z = 0.012;
     pose.orientation.x = 0.0;
     pose.orientation.y = 0.01;
     pose.orientation.z = -0.03;
@@ -57,7 +57,7 @@ client::client(ros::NodeHandle& nh): nh(nh){
     
 
     tgrip_manip_actions::pick_placeGoal goal;
-    goal.goal.position = position;
+    goal.goal.pose = pose;
 
     for(int i=0;i<1;i++){
 
