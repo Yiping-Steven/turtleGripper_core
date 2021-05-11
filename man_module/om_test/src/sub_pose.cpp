@@ -1,5 +1,19 @@
+#include <ros/ros.h>
+//MOVE IT
+#include <iostream>
+#include <stdlib.h> 
+#include <moveit/planning_scene_interface/planning_scene_interface.h>
+#include <moveit/move_group_interface/move_group_interface.h>
+#include <moveit_msgs/DisplayTrajectory.h>
+#include <moveit_msgs/DisplayRobotState.h>
+#include <moveit_msgs/AttachedCollisionObject.h>
+#include <moveit_msgs/CollisionObject.h>
+#include <moveit/robot_model_loader/robot_model_loader.h>
+#include <moveit/robot_model/robot_model.h>
+#include <moveit/robot_state/robot_state.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+
 #include <tgrip_manip_srvcli/client.hpp>
-#include <cmath>
 
 // Called once when the goal completes
 void doneCb(const actionlib::SimpleClientGoalState& state,
@@ -24,34 +38,24 @@ void feedbackCb(const tgrip_manip_actions::pick_placeFeedbackConstPtr& feedback)
 
 }
 
-client::client(ros::NodeHandle& nh): nh(nh){
-    //sub_fb = nh.subscribe("/action_server/feedback", 10, &client::feedbackCb, this);
-
+void clientCallback(const std_msgs::Float64MultiArray& position)
+{
     actionlib::SimpleActionClient<tgrip_manip_actions::pick_placeAction> ac("action_server", true);
 
    
     ac.waitForServer();
 
-    geometry_msgs::Pose pose;
-
-    pose.position.x = 0.4;
-    pose.position.y = -0.2;
-    pose.position.z = 0.0;
-    pose.orientation.x = 0.0;
-    pose.orientation.y = 0.01;
-    pose.orientation.z = -0.03;
-    pose.orientation.w = 0.99;
-    // std_msgs::Float64MultiArray position;
-    // position.layout.dim.push_back(std_msgs::MultiArrayDimension());
-    // position.layout.dim[0].label = "postion";
-    // position.layout.dim[0].size = 3;
-    // position.layout.dim[0].stride = 1;
-    // position.layout.data_offset = 0;
-    // float xp = 0.2;
+    std_msgs::Float64MultiArray position;
+    position.layout.dim.push_back(std_msgs::MultiArrayDimension());
+    position.layout.dim[0].label = "postion";
+    position.layout.dim[0].size = 3;
+    position.layout.dim[0].stride = 1;
+    position.layout.data_offset = 0;
+    float xp = 0.2;
  
-    // position.data.push_back(0.4);//x
-    // position.data.push_back(-0.2);//y
-    // position.data.push_back(0.0);//z
+    position.data.push_back(position[0]);//x
+    position.data.push_back(position[1]);//y
+    position.data.push_back(position[0]);//z
     
     //std::cout << position << std::endl;
     
@@ -71,4 +75,20 @@ client::client(ros::NodeHandle& nh): nh(nh){
         std::string result_s = state.toString();
 
     }
+}
+
+int main(int argc, char **argv)
+{
+
+    ros::init(argc, argv, "custom_planning");
+    ros::NodeHandle nh;
+    ros::AsyncSpinner spinner(1);
+    spinner.start();
+    sleep(2.0);
+
+    ros::Subscriber sub =nh.subscribe("desired", 10, clientCallback)
+
+    ros::spin();
+
+    return 0;
 }
