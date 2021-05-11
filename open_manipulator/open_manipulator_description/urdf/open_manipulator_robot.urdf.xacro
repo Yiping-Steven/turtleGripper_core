@@ -15,13 +15,13 @@
   <xacro:include filename="$(find open_manipulator_description)/urdf/open_manipulator.urdf.xacro" />
 
   <!-- World -->
-  <link name="world"/>
+  <!-- <link name="world"/> -->
 
   <!-- World fixed joint-->
-  <joint name="world_fixed" type="fixed">
+  <!-- <joint name="world_fixed" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <parent link="world"/>
     <child link="link1"/>
-  </joint>
+  </joint> -->
 
 </robot>
