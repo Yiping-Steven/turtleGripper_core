@@ -20,7 +20,7 @@ void activeCb()
 void feedbackCb(const tgrip_manip_actions::pick_placeFeedbackConstPtr& feedback)
 {
     // ROS_INFO("Got Feedback of length %lu", feedback->feedback_code.size());
-    // ROS_INFO("%s",feedback->feedback.feedback_code.c_str());
+    ROS_INFO("%s",feedback->feedback_code.feedback_code.c_str());
 
 }
 
@@ -34,13 +34,13 @@ client::client(ros::NodeHandle& nh): nh(nh){
 
     geometry_msgs::Pose pose;
 
-    pose.position.x = 0.4;
-    pose.position.y = -0.2;
-    pose.position.z = 0.0;
+    pose.position.x = 0.42;
+    pose.position.y = -0.004;
+    pose.position.z = 0.012;
     pose.orientation.x = 0.0;
-    pose.orientation.y = 0.01;
-    pose.orientation.z = -0.03;
-    pose.orientation.w = 0.99;
+    pose.orientation.y = 0.0;
+    pose.orientation.z = 0.0;
+    pose.orientation.w = 1;
     // std_msgs::Float64MultiArray position;
     // position.layout.dim.push_back(std_msgs::MultiArrayDimension());
     // position.layout.dim[0].label = "postion";
@@ -57,7 +57,7 @@ client::client(ros::NodeHandle& nh): nh(nh){
     
 
     tgrip_manip_actions::pick_placeGoal goal;
-    goal.goal.position = position;
+    goal.goal.pose = pose;
 
     for(int i=0;i<1;i++){
 
