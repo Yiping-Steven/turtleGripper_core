@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!-- Open_Manipulator Chain -->
-<robot name ="workspace" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name ="workspace"
+  xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="workspace" params="parent ">
-      
+
     <!-- Link 1 -->
     <link name="workspace">
       <visual>
@@ -10,16 +11,11 @@
         <geometry>
           <mesh filename="package://openmanipulator_description/mesh/work_space.stl" scale="0.001 0.001 0.001"/>
         </geometry>
-        <material name="grey"/>
+        <material name="grey">
+          <color rgba="0.5 0.5 0.5 0.2"/>
+        </material>
       </visual>
 
-      <inertial>
-        <origin xyz="3.0876154e-04 0.0000000e+00 -1.2176461e-04" />
-        <mass value="7.9119962e-02" />
-        <inertia ixx="1.2505234e-05" ixy="0.0" ixz="-1.7855208e-07"
-                iyy="2.1898364e-05" iyz="0.0"
-                izz="1.9267361e-05" />
-      </inertial>
     </link>
 
     <joint name="workspace" type="fixed">
@@ -30,5 +26,5 @@
     </joint>
 
   </xacro:macro>
-  
+
 </robot>

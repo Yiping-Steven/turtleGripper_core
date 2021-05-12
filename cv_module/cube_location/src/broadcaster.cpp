@@ -8,7 +8,6 @@
 #include<geometry_msgs/Point.h>
 
 
-
 int main( int argc, char** argv ){
 
   ros::init( argc, argv, "publisher_node" );
@@ -25,24 +24,19 @@ int main( int argc, char** argv ){
   std::cout<<"Cube position advertised"<<std::endl;
   
   
-  std::deque<std::vector<double>> cubeVec;
-  std::cout<<"Deque created empty:"<<std::endl;  
-  
+  std::deque<std::vector<double>> cubeVec;//Buffer of the pose
+  int nDec = 10; //Buffer size
+  bool cubeNotFound = true;
   while (nh.ok()){
-    
-    std::cout<<"Publisher running"<<std::endl;
 
-    geometry_msgs::Point cube_pose;
-    std::cout<< cubeVec.size()<<std::endl;
     std::vector<double> res {0.0 ,0.0, 0.0};
-    //If the length of deque less than 5, return nans
-    if (cubeVec.size() < 5) {
-      
+    //If the cube hasn't been seen yet, return nans
+    if (cubeNotFound) {
       //Assign nan to the response
       for (int i=0; i<res.size(); i++){
 	res[i] = nanf("");
       }
-      
+  
     } else { 
 
       //Get the Average Position from the vector
@@ -50,37 +44,40 @@ int main( int argc, char** argv ){
         for (int k = 0; k < res.size(); k++) {
     	  res[k] = res[k] + cubeVec[i][k];
 	}
-	//	std::cout<<res[k]<<std::endl;
       }
     }
 
     //Published cube pose
+    geometry_msgs::Point cube_pose;
     cube_pose.x = res[0];
     cube_pose.y = res[1];
     cube_pose.z = res[2];    
     cube_publisher.publish(cube_pose);
-    std::cout<<cube_pose.x<<cube_pose.y<<cube_pose.z<<std::endl;
-    std::cout<<res[0]<<res[1]<<res[2]<<std::endl;
+    //    std::cout<<cube_pose.x<<cube_pose.y<<cube_pose.z<<std::endl;
+    //    std::cout<<res[0]<<res[1]<<res[2]<<std::endl;
+
     // Get the transform from map to cube
     std::cout<<"Waiting for the transform"<<std::endl;
     try{
       ros::Time now=ros::Time(0);
-      listener.waitForTransform( world_name, "/cube", now, ros::Duration(20.0));
+      listener.waitForTransform( world_name, "/cube", now, ros::Duration(2.0));
       listener.lookupTransform( world_name, "/cube", now, transform);
+
+      // Add position from the transform to deque
+      std::vector<double> cube_vec {transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z()};
+      cubeVec.push_back(cube_vec);
+      std::cout<<"New cube pose acquired"<<std::endl;
+      //Mark that the cube was found (only important for first sighting)
+      cubeNotFound = false;
     }
     catch (tf::TransformException ex){
       ROS_ERROR("%s",ex.what());
     }
-    
-    // Add position from the transform to deque
-    std::vector<double> cube_vec {transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z()};
-    cubeVec.push_back(cube_vec);
-    std::cout<<"New vector acquired"<<std::endl;
-    
+        
     //If deque has more than 5 items, pop the oldest
-    if (cubeVec.size() > 5){
+    if (cubeVec.size() > nDec){
       cubeVec.pop_front();
-      std::cout<<"Pushing back the cubeVect"<<std::endl;
+      //      std::cout<<"Pushing back the cubeVect"<<std::endl;
     }
     
     // ros::spinOnce();
