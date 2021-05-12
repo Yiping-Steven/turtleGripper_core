@@ -25,9 +25,10 @@ int main( int argc, char** argv ){
   std::cout<<"Cube position advertised"<<std::endl;
   
   
-  std::deque<std::vector<double>> cubeVec;
+  std::deque<std::vector<double>> cubeVec;//Buffer of the pose
+  int nDec = 10; //Buffer size
   std::cout<<"Deque created empty:"<<std::endl;  
-  
+  bool cubeNotFound = true;
   while (nh.ok()){
     
     std::cout<<"Publisher running"<<std::endl;
@@ -35,14 +36,13 @@ int main( int argc, char** argv ){
     geometry_msgs::Point cube_pose;
     std::cout<< cubeVec.size()<<std::endl;
     std::vector<double> res {0.0 ,0.0, 0.0};
-    //If the length of deque less than 5, return nans
-    if (cubeVec.size() < 5) {
-      
+    //If the cube hasn't been seen yet, return nans
+    if (cubeNotFound) {
       //Assign nan to the response
       for (int i=0; i<res.size(); i++){
 	res[i] = nanf("");
       }
-      
+  
     } else { 
 
       //Get the Average Position from the vector
@@ -50,7 +50,6 @@ int main( int argc, char** argv ){
         for (int k = 0; k < res.size(); k++) {
     	  res[k] = res[k] + cubeVec[i][k];
 	}
-	//	std::cout<<res[k]<<std::endl;
       }
     }
 
@@ -65,20 +64,22 @@ int main( int argc, char** argv ){
     std::cout<<"Waiting for the transform"<<std::endl;
     try{
       ros::Time now=ros::Time(0);
-      listener.waitForTransform( world_name, "/cube", now, ros::Duration(20.0));
+      listener.waitForTransform( world_name, "/cube", now, ros::Duration(2.0));
       listener.lookupTransform( world_name, "/cube", now, transform);
+
+      // Add position from the transform to deque
+      std::vector<double> cube_vec {transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z()};
+      cubeVec.push_back(cube_vec);
+      std::cout<<"New vector acquired"<<std::endl;
+      //Mark that the cube was found (only important for first sighting
+      cubeNotFound = false;
     }
     catch (tf::TransformException ex){
       ROS_ERROR("%s",ex.what());
     }
-    
-    // Add position from the transform to deque
-    std::vector<double> cube_vec {transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z()};
-    cubeVec.push_back(cube_vec);
-    std::cout<<"New vector acquired"<<std::endl;
-    
+        
     //If deque has more than 5 items, pop the oldest
-    if (cubeVec.size() > 5){
+    if (cubeVec.size() > nDec){
       cubeVec.pop_front();
       std::cout<<"Pushing back the cubeVect"<<std::endl;
     }
