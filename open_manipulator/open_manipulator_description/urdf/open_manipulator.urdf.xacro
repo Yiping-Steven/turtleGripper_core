@@ -247,7 +247,7 @@
   </joint>
 
   <!-- end effector link -->
-  <!-- <link name="end_effector_link">
+  <link name="end_effector_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -263,7 +263,7 @@
                iyy="1.0e-03" iyz="0.0"
                izz="1.0e-03" />
     </inertial>
-  </link> -->
+  </link>
 
   <!-- Realsense Camera Joint Position -->
   <!-- <joint name="camera_joint" type="fixed">
