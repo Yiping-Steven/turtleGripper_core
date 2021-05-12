@@ -29,7 +29,7 @@
   </link>
 
   <!-- Joint 1 -->
-  <joint name="joint1" type="revolute">
+  <joint name="joint1" type="fixed">
     <parent link="link1"/>
     <child link="link2"/>
     <origin xyz="0.012 0.0 0.017" rpy="0 0 0"/>
@@ -64,7 +64,7 @@
   </link>
 
   <!--  Joint 2 -->
-  <joint name="joint2" type="revolute">
+  <joint name="joint2" type="fixed">
     <parent link="link2"/>
     <child link="link3"/>
     <origin xyz="0.0 0.0 0.0595" rpy="0  ${pi/4} 0"/>
@@ -99,7 +99,7 @@
   </link>
 
   <!--  Joint 3 -->
-  <joint name="joint3" type="revolute">
+  <joint name="joint3" type="fixed">
     <parent link="link3"/>
     <child link="link4"/>
     <origin xyz="0.024 0 0.128" rpy="0 ${pi/4} 0"/>
@@ -134,7 +134,7 @@
   </link>
 
   <!--  Joint 4 -->
-  <joint name="joint4" type="revolute">
+  <joint name="joint4" type="fixed">
     <parent link="link4"/>
     <child link="link5"/>
     <origin xyz="0.124 0.0 0.0" rpy="0 0 0"/>
@@ -169,7 +169,7 @@
   </link>
 
   <!--  Gripper joint -->
-  <joint name="gripper" type="prismatic">
+  <joint name="gripper" type="fixed">
     <parent link="link5"/>
     <child link="gripper_link"/>
     <origin xyz="0.0817 0.021 0.0" rpy="0 0 0"/>
@@ -204,7 +204,7 @@
   </link>
 
   <!--  Gripper joint sub -->
-  <joint name="gripper_sub" type="prismatic">
+  <joint name="gripper_sub" type="fixed">
     <parent link="link5"/>
     <child link="gripper_link_sub"/>
     <origin xyz="0.0817 -0.021 0" rpy="0 0 0"/>
