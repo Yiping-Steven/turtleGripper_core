@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--Launches cv module -->
+<launch>
+  <include file = "$(find cube_tf_broadcast)/launch/all_tag_broadcaster.launch">
+    <arg name="world_name" value="base_link"/>
+  </include>
+
+  <include file = "$(find cube_location)/launch/broadcaster.launch">
+    <arg name="world_name" value="map"/>
+  </include>
+
+</launch>
+  
