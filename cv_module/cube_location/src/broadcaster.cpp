@@ -8,7 +8,6 @@
 #include<geometry_msgs/Point.h>
 
 
-
 int main( int argc, char** argv ){
 
   ros::init( argc, argv, "publisher_node" );
@@ -58,8 +57,9 @@ int main( int argc, char** argv ){
     cube_pose.y = res[1];
     cube_pose.z = res[2];    
     cube_publisher.publish(cube_pose);
-    std::cout<<cube_pose.x<<cube_pose.y<<cube_pose.z<<std::endl;
-    std::cout<<res[0]<<res[1]<<res[2]<<std::endl;
+    //    std::cout<<cube_pose.x<<cube_pose.y<<cube_pose.z<<std::endl;
+    //    std::cout<<res[0]<<res[1]<<res[2]<<std::endl;
+
     // Get the transform from map to cube
     std::cout<<"Waiting for the transform"<<std::endl;
     try{
@@ -70,8 +70,8 @@ int main( int argc, char** argv ){
       // Add position from the transform to deque
       std::vector<double> cube_vec {transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z()};
       cubeVec.push_back(cube_vec);
-      std::cout<<"New vector acquired"<<std::endl;
-      //Mark that the cube was found (only important for first sighting
+      std::cout<<"New cube pose acquired"<<std::endl;
+      //Mark that the cube was found (only important for first sighting)
       cubeNotFound = false;
     }
     catch (tf::TransformException ex){
@@ -81,7 +81,7 @@ int main( int argc, char** argv ){
     //If deque has more than 5 items, pop the oldest
     if (cubeVec.size() > nDec){
       cubeVec.pop_front();
-      std::cout<<"Pushing back the cubeVect"<<std::endl;
+      //      std::cout<<"Pushing back the cubeVect"<<std::endl;
     }
     
     // ros::spinOnce();
