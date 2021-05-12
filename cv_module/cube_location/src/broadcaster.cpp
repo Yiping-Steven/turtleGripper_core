@@ -26,14 +26,9 @@ int main( int argc, char** argv ){
   
   std::deque<std::vector<double>> cubeVec;//Buffer of the pose
   int nDec = 10; //Buffer size
-  std::cout<<"Deque created empty:"<<std::endl;  
   bool cubeNotFound = true;
   while (nh.ok()){
-    
-    std::cout<<"Publisher running"<<std::endl;
 
-    geometry_msgs::Point cube_pose;
-    std::cout<< cubeVec.size()<<std::endl;
     std::vector<double> res {0.0 ,0.0, 0.0};
     //If the cube hasn't been seen yet, return nans
     if (cubeNotFound) {
@@ -53,6 +48,7 @@ int main( int argc, char** argv ){
     }
 
     //Published cube pose
+    geometry_msgs::Point cube_pose;
     cube_pose.x = res[0];
     cube_pose.y = res[1];
     cube_pose.z = res[2];    

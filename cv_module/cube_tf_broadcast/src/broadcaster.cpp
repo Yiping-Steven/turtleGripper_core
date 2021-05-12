@@ -35,7 +35,6 @@ int main( int argc, char** argv ){
   ros::Subscriber sub;
   std::string t_name;
   nhp.getParam( "marker_name", t_name );
-  std::cout<<"Main"<<std::endl;
   sub = nh.subscribe("/"+t_name+"/pose", 10, &callback);
   ros::spin();
 
