@@ -14,7 +14,7 @@ Originated from a course project of  **Robot System Programming**
 
   0. ROS is our preliminary requirement.
 
- 1. Here's our code [repo](https://github.com/Yiping-Steven/turtleGripper.git), put it somewhere and built.
+ 1. Here's our [core repo](https://github.com/Yiping-Steven/turtleGripper_core.git) and [3rd-Party repo](https://github.com/Yiping-Steven/turtleGripper_3rdParty.git), put it somewhere and build.
 
 ```jsx
 mkdir -p ~/projects/tgrip_ws/src
