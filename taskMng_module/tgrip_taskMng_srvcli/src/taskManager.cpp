@@ -42,6 +42,15 @@ bool tgrip::taskManager::tskMngSrvCB( tgrip_taskMng_msgs::serviceQuery::Request 
 
 
 void tgrip::taskManager::tskTimedPatrolGoalCB(){
+  cubeFound = false;
+  subCube = nh.subscribe("/cube_position", 10, & taskManager::cubeCallback, this);
+  cubeTargetPub =  nh.advertise<move_base_msgs::MoveBaseActionGoal>("/move_base/goal",10);  
+  if (cubeFound){
+    //Publish the new goal
+    cubeTargetPub.publish(targetPose);
+  } 
+}
+    
   // 1. tskGlobalNavigation()
   /*Call [Nav], from its base, start exploring. 
     Random walking is the bottom line, but I'll try to be inclusive. (Use AR tags)
@@ -179,3 +188,27 @@ void tgrip::taskManager::odomCallback(const nav_msgs::Odometry::ConstPtr& odomMs
             << poseCurrent.y << ", " 
             << poseCurrent.theta << "  %%odomCallback" << std::endl;
 }
+
+
+void tgrip::taskManager::cubeCallback( const cv_msgs::Cube& cube_detect ){
+  //Find the pose cubeDistance away from the cube 
+  if ( cube_detect.cubeFound.data ) {
+    cubeFound = true;
+    cubePoint.x = cube_detect -> cubePosition.x;
+    cubePoint.y = cube_detect -> cubePosition.y;
+    targetPose.goal.pose.position.x = cubePoint.x - poseCurrent.x;
+    targetPose.goal.pose.position.y = cubePoint.y - poseCurrent.y;
+    double norm = sqrt( pow( targetPose.goal.pose.position.x, 2) + pow( targetPose.goal.pose.position.y, 2 ) );
+    targetPose.goal.pose.position.x = cubePoint.x - cubeDistance * targetPose.goal.pose.position.x / norm;
+    targetPose.goal.pose.position.y = cubePoint.y - cubeDistance * targetPose.goal.pose.position.y / norm;
+    targetPose.goal.pose.orientation.x = 0.0;
+    targetPose.goal.pose.orientation.y = 0.0;
+    targetPose.goal.pose.orientation.z = poseCurrent -> theta;
+    targetPose.goal.pose.orientation.w = 1.0;
+  }
+  if (cube_detect.cubeInView.data) {
+    cubeInView = true;
+  }
+}
+
+
