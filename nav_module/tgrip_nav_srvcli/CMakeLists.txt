@@ -9,6 +9,7 @@ project(tgrip_nav_srvcli)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   actionlib
+  actionlib_msgs
   tgrip_nav_actions
 )
 
