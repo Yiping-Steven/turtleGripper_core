@@ -27,13 +27,15 @@ int main( int argc, char** argv ){
   
   std::deque<std::vector<double>> cubeVec;//Buffer of the pose
   int nDec = 10; //Buffer size
-  bool cubeNotFound = true;
+ 
   cv_msgs::Cube cube_detect;
+  cube_detect.cubeFound.data = false;//set to not found from the start
+
   while (nh.ok()){
 
     std::vector<double> res {0.0 ,0.0, 0.0};
     //If the cube hasn't been seen yet, return nans for its position
-    if (cubeNotFound) {
+    if ( ~cube_detect.cubeFound.data ) {
       //Assign nan to the response
       for (int i=0; i<res.size(); i++){
 	res[i] = nanf("");
@@ -50,7 +52,6 @@ int main( int argc, char** argv ){
     }
 
     //Published cube pose
-    //    geometry_msgs::Point cube_pose;
     cube_detect.cubePosition.x = res[0];
     cube_detect.cubePosition.y = res[1];
     cube_detect.cubePosition.z = res[2];    
