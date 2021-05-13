@@ -35,7 +35,7 @@
   <!--   <depend>roscpp</depend> -->
   <!--   Note that this is equivalent to the following: -->
   <!--   <build_depend>roscpp</build_depend> -->
-    <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
   <!-- Use build_depend for packages you need at compile time: -->
   <!--   <build_depend>message_generation</build_depend> -->
   <!-- Use build_export_depend for packages you need in order to build against this package: -->
@@ -58,6 +58,6 @@
           the package.xml file. You can than use URIs of type model://my_package/stuff. -->
       <gazebo_ros                                                                 
           gazebo_plugin_path="${prefix}/lib"
-          gazebo_model_path="${prefix}/.." /> 
+          gazebo_model_path="${prefix}/worlds/model_source/" /> 
   </export>
 </package>
