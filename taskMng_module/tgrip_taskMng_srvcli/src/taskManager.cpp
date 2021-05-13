@@ -204,6 +204,8 @@ void tgrip::taskManager::cubeCallback( const cv_msgs::Cube& cube_detect ){
     targetPose.goal.pose.orientation.y = 0.0;
     targetPose.goal.pose.orientation.z = poseCurrent -> theta;
     targetPose.goal.pose.orientation.w = 1.0;
+
+    targetPose.goal.header.frame_id = "map";
   }
   if (cube_detect.cubeInView.data) {
     cubeInView = true;

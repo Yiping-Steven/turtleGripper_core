@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   tgrip_taskMng_actions
   roscpp
   tgrip_taskMng_msgs
+  cv_msgs
   message_generation
 )
 
@@ -74,6 +75,7 @@ generate_messages(
   DEPENDENCIES
   actionlib_msgs
   tgrip_taskMng_msgs
+  cv_msgs
   std_msgs  # Or other packages containing msgs
 )
 
