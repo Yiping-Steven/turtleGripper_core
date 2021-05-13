@@ -19,7 +19,7 @@ bool tgrip::taskManager::tskMngSrvCB( tgrip_taskMng_msgs::serviceQuery::Request 
 
   if (req.queryCode == 3)  {
     tskTimedPatrolASPtr.reset( new tskTimedPatrolActionServer(nh, "tskTimedPatrolActionServer", false) );
-    tskTimedPatrolASPtr->registerGoalCallback( boost::bind( tgrip::taskManager::tskTimedPatrolGoalCB ) );
+    tskTimedPatrolASPtr->registerGoalCallback( boost::bind( &tgrip::taskManager::tskTimedPatrolGoalCB, this ) );
     tskTimedPatrolASPtr->start();
   }
 
@@ -47,7 +47,7 @@ void tgrip::taskManager::tskTimedPatrolGoalCB(){
   cubeTargetPub =  nh.advertise<move_base_msgs::MoveBaseActionGoal>("/move_base/goal",10);  
   if (cubeFound){
     //Publish the new goal
-    cubeTargetPub.publish(targetPose);
+    cubeTargetPub.publish(goal);
   } 
 
     
@@ -193,19 +193,29 @@ void tgrip::taskManager::cubeCallback( const cv_msgs::Cube& cube_detect ){
   //Find the pose cubeDistance away from the cube 
   if ( cube_detect.cubeFound.data ) {
     cubeFound = true;
-    cubePoint.x = cube_detect -> cubePosition.x;
-    cubePoint.y = cube_detect -> cubePosition.y;
-    targetPose.goal.pose.position.x = cubePoint.x - poseCurrent.x;
-    targetPose.goal.pose.position.y = cubePoint.y - poseCurrent.y;
-    double norm = sqrt( pow( targetPose.goal.pose.position.x, 2) + pow( targetPose.goal.pose.position.y, 2 ) );
-    targetPose.goal.pose.position.x = cubePoint.x - cubeDistance * targetPose.goal.pose.position.x / norm;
-    targetPose.goal.pose.position.y = cubePoint.y - cubeDistance * targetPose.goal.pose.position.y / norm;
-    targetPose.goal.pose.orientation.x = 0.0;
-    targetPose.goal.pose.orientation.y = 0.0;
-    targetPose.goal.pose.orientation.z = poseCurrent -> theta;
-    targetPose.goal.pose.orientation.w = 1.0;
+    cubePoint.x = cube_detect.cubePosition.x;
+    cubePoint.y = cube_detect.cubePosition.y;
+    goal.goal.target_pose.pose.position.x = cubePoint.x - poseCurrent.x;
+    goal.goal.target_pose.pose.position.y = cubePoint.y - poseCurrent.y;
+    double norm = sqrt( pow( goal.goal.target_pose.pose.position.x, 2) + pow( goal.goal.target_pose.pose.position.y, 2 ) );
+    goal.goal.target_pose.pose.position.x = cubePoint.x - cubeDistance * goal.goal.target_pose.pose.position.x / norm;
+    goal.goal.target_pose.pose.position.y = cubePoint.y - cubeDistance * goal.goal.target_pose.pose.position.y / norm;
+    goal.goal.target_pose.pose.orientation.x = 0.0;
+    goal.goal.target_pose.pose.orientation.y = 0.0;
+    goal.goal.target_pose.pose.orientation.z = poseCurrent.theta;
+    goal.goal.target_pose.pose.orientation.w = 1.0;
 
-    targetPose.goal.header.frame_id = "map";
+    // goal.goal_id.stamp = ros::Time();
+
+    goal.goal.target_pose.header.stamp = ros::Time::now();
+    goal.goal.target_pose.header.frame_id = "map";
+    goal.goal_id.stamp = ros::Time::now();
+    goal.goal_id.id = "10"; 
+
+    goal.header.stamp = ros::Time::now();
+    goal.header.frame_id = "10";
+    goal.header.seq = 9;
+    
   }
   if (cube_detect.cubeInView.data) {
     cubeInView = true;

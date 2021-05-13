@@ -9,6 +9,8 @@ add_compile_options(-std=c++11)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   actionlib
+  actionlib_msgs
+
   tgrip_taskMng_actions
   roscpp
   tgrip_taskMng_msgs
@@ -111,7 +113,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES tgrip_taskMng_srvcli
- CATKIN_DEPENDS actionlib tgrip_taskMng_actions message_runtime
+ CATKIN_DEPENDS actionlib tgrip_taskMng_actions message_runtime actionlib_msgs
 #  DEPENDS system_lib
 )
 
