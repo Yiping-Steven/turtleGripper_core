@@ -48,11 +48,13 @@
   <!--   <test_depend>gtest</test_depend> -->
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
+  <depend>actionlib_msgs</depend>
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>actionlib</build_depend>
   <build_depend>tgrip_taskMng_actions</build_depend>
   <build_depend>cv_msgs</build_depend>
   <build_export_depend>actionlib</build_export_depend>
+  <!-- <build_export_depend>actionlib_msgs</build_export_depend> -->
   <build_export_depend>cv_msgs</build_export_depend>
   <build_export_depend>tgrip_taskMng_actions</build_export_depend>
   <exec_depend>actionlib</exec_depend>

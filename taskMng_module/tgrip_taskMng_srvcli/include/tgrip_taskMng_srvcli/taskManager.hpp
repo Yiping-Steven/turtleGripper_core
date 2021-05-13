@@ -22,6 +22,7 @@
 #include <geometry_msgs/Point.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <move_base_msgs/MoveBaseActionGoal.h>
+#include <cv_msgs/Cube.h>
 // utilities
 #include <memory>
 #include <tf/tf.h>
@@ -127,7 +128,7 @@ namespace tgrip{
         bool cubeFound;
         bool cubeInView;
         double cubeDistance = 0.30; //target distance to the cube
-        move_base_msgs::MoveBaseActionGoal targetPose;
+        move_base_msgs::MoveBaseActionGoal goal;
         // geometry_msgs::PoseStamped targetPose;
         geometry_msgs::Point cubePoint;
       
@@ -139,7 +140,7 @@ namespace tgrip{
                         tgrip_taskMng_msgs::serviceQuery::Response &res ); // almost done
         void odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsgPtr); // done
 
-        void cubeCallback(const geometry_msgs::Point& msg); // in progress
+        void cubeCallback( const cv_msgs::Cube& cube_detect ); // in progress
         // functions, task oriented
         void tskMeteredPatrolGoalCB();    // TODO, together
         void tskTimedPatrolGoalCB();    // TODO, together
