@@ -35,7 +35,7 @@ int main( int argc, char** argv ){
 
     std::vector<double> res {0.0 ,0.0, 0.0};
     //If the cube hasn't been seen yet, return nans for its position
-    if ( ~cube_detect.cubeFound.data ) {
+    if ( !cube_detect.cubeFound.data ) {
       //Assign nan to the response
       for (int i=0; i<res.size(); i++){
 	res[i] = nanf("");
@@ -46,7 +46,7 @@ int main( int argc, char** argv ){
       //Get the Average Position from the vector
       for (int i = 0; i < cubeVec.size(); i++) {
         for (int k = 0; k < res.size(); k++) {
-    	  res[k] = res[k] + cubeVec[i][k];
+    	  res[k] = res[k] + cubeVec[i][k] / cubeVec.size();
 	}
       }
     }
@@ -76,7 +76,7 @@ int main( int argc, char** argv ){
       cube_detect.cubeInView.data = true;
     }
     catch (tf::TransformException ex){
-      ROS_ERROR("%s",ex.what());
+      ROS_INFO("%s",ex.what());
       //Cube cannot be seen right now
       cube_detect.cubeInView.data = false;
     }
