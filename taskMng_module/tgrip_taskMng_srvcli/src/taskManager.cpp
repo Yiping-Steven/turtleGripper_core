@@ -49,7 +49,7 @@ void tgrip::taskManager::tskTimedPatrolGoalCB(){
     //Publish the new goal
     cubeTargetPub.publish(targetPose);
   } 
-}
+
     
   // 1. tskGlobalNavigation()
   /*Call [Nav], from its base, start exploring. 
@@ -94,81 +94,80 @@ void tgrip::taskManager::tskMeteredPatrolGoalCB(){
   // very similar to tskTimedPatrolGoalCB, difference is merely the termination condition
 };
 
-void tgrip::taskManager::tskMeteredPatrolGoalCB(){};
 
 
-void tgrip::taskManager::tskFetchingGoalCB(){
-  std::cout << "taskMngServer::goalCB" << std::endl;
-  goal = *(as->acceptNewGoal());
-  std::cout << "New Goal Received:  ("<< goal.goal.poseGoal.x << ", "
-                                      << goal.goal.poseGoal.y << ", "
-                                      << goal.goal.poseGoal.theta << " ) "
-                                      << std::endl;
-  time(&timerMissionStart);
-  distMeasure = 0;
+// void tgrip::taskManager::tskFetchingGoalCB(){
+//   std::cout << "taskMngServer::goalCB" << std::endl;
+//   goal = *(as->acceptNewGoal());
+//   std::cout << "New Goal Received:  ("<< goal.goal.poseGoal.x << ", "
+//                                       << goal.goal.poseGoal.y << ", "
+//                                       << goal.goal.poseGoal.theta << " ) "
+//                                       << std::endl;
+//   time(&timerMissionStart);
+//   distMeasure = 0;
 
   
-  double theta1 = atan2(goal.goal.poseGoal.y - poseCurrent.y, goal.goal.poseGoal.x - poseCurrent.x ); // unit in rad
-  double thetaDiffOrg = theta1 - poseCurrent.theta; // CCW +, CW -
-  double thetaDiff = thetaDiffOrg;
-  feedback.feedback.feedbackCode = "Phase 1: Stand at the current position and rotate " 
-                                    + std::to_string( thetaDiffOrg ) + " radians.";
-  feedback.feedback.prevTarget = 0;
-  feedback.feedback.nextTarget = theta1;
-  as->publishFeedback(feedback);  
-  geometry_msgs::Twist cmdVelTwist;
-  while ( abs(thetaDiff) > goal.goal.angTol){
+//   double theta1 = atan2(goal.goal.poseGoal.y - poseCurrent.y, goal.goal.poseGoal.x - poseCurrent.x ); // unit in rad
+//   double thetaDiffOrg = theta1 - poseCurrent.theta; // CCW +, CW -
+//   double thetaDiff = thetaDiffOrg;
+//   feedback.feedback.feedbackCode = "Phase 1: Stand at the current position and rotate " 
+//                                     + std::to_string( thetaDiffOrg ) + " radians.";
+//   feedback.feedback.prevTarget = 0;
+//   feedback.feedback.nextTarget = theta1;
+//   as->publishFeedback(feedback);  
+//   geometry_msgs::Twist cmdVelTwist;
+//   while ( abs(thetaDiff) > goal.goal.angTol){
 
-    cmdVelTwist.angular.z = 1 * thetaDiff/abs(thetaDiffOrg); // CCW +, CW -
-    pubCmd.publish(cmdVelTwist);
-    thetaDiff = theta1 - poseCurrent.theta;
-  }
-  cmdVelTwist.angular.z = 0;
-  pubCmd.publish(cmdVelTwist);
+//     cmdVelTwist.angular.z = 1 * thetaDiff/abs(thetaDiffOrg); // CCW +, CW -
+//     pubCmd.publish(cmdVelTwist);
+//     thetaDiff = theta1 - poseCurrent.theta;
+//   }
+//   cmdVelTwist.angular.z = 0;
+//   pubCmd.publish(cmdVelTwist);
 
 
-  double xDiff = goal.goal.poseGoal.x - poseCurrent.x;
-  double yDiff = goal.goal.poseGoal.y - poseCurrent.y;
-  double pathLenOrg = sqrt(pow(xDiff,2)+pow(yDiff,2));
-  double pathLen = pathLenOrg;
+//   double xDiff = goal.goal.poseGoal.x - poseCurrent.x;
+//   double yDiff = goal.goal.poseGoal.y - poseCurrent.y;
+//   double pathLenOrg = sqrt(pow(xDiff,2)+pow(yDiff,2));
+//   double pathLen = pathLenOrg;
 
-  // feedback.feedback.feedbackCode = "Phase 2: Move straight forward."
-  //                                   + string( pathLenOrg ) + " meters.";
-  // feedback.feedback.prevTarget = thetaDiff;
-  // feedback.feedback.nextTarget = pathLenOrg;
+//   // feedback.feedback.feedbackCode = "Phase 2: Move straight forward."
+//   //                                   + string( pathLenOrg ) + " meters.";
+//   // feedback.feedback.prevTarget = thetaDiff;
+//   // feedback.feedback.nextTarget = pathLenOrg;
 
-  as->publishFeedback(feedback);
+//   as->publishFeedback(feedback);
 
-  while ( pathLen > goal.goal.posTol){
-    cmdVelTwist.linear.x = 0.2; // CCW +, CW -
-    pubCmd.publish(cmdVelTwist);
-    xDiff = goal.goal.poseGoal.x - poseCurrent.x;
-    yDiff = goal.goal.poseGoal.y - poseCurrent.y;
-    pathLen = sqrt(pow(xDiff,2)+pow(yDiff,2));
-  }
-  cmdVelTwist.linear.x = 0; // CCW +, CW -
-  pubCmd.publish(cmdVelTwist);
+//   while ( pathLen > goal.goal.posTol){
+//     cmdVelTwist.linear.x = 0.2; // CCW +, CW -
+//     pubCmd.publish(cmdVelTwist);
+//     xDiff = goal.goal.poseGoal.x - poseCurrent.x;
+//     yDiff = goal.goal.poseGoal.y - poseCurrent.y;
+//     pathLen = sqrt(pow(xDiff,2)+pow(yDiff,2));
+//   }
+//   cmdVelTwist.linear.x = 0; // CCW +, CW -
+//   pubCmd.publish(cmdVelTwist);
 
-  feedback.feedback.feedbackCode = "Phase 3: Stand at the current position and rotate.";
-  as->publishFeedback(feedback);  
-  thetaDiffOrg = goal.goal.poseGoal.theta - poseCurrent.theta; // CCW +, CW -
-  thetaDiff = thetaDiffOrg;
-  while ( abs(thetaDiff) > goal.goal.angTol){
-    cmdVelTwist.angular.z = 1 * thetaDiff/abs(thetaDiffOrg); // CCW +, CW -
-    pubCmd.publish(cmdVelTwist);
-    thetaDiff = theta1 - poseCurrent.theta;
-    time(&timerPhase3);
-  }
-  cmdVelTwist.angular.z = 0;
-  pubCmd.publish(cmdVelTwist);
+//   feedback.feedback.feedbackCode = "Phase 3: Stand at the current position and rotate.";
+//   as->publishFeedback(feedback);  
+//   thetaDiffOrg = goal.goal.poseGoal.theta - poseCurrent.theta; // CCW +, CW -
+//   thetaDiff = thetaDiffOrg;
+//   while ( abs(thetaDiff) > goal.goal.angTol){
+//     cmdVelTwist.angular.z = 1 * thetaDiff/abs(thetaDiffOrg); // CCW +, CW -
+//     pubCmd.publish(cmdVelTwist);
+//     thetaDiff = theta1 - poseCurrent.theta;
+//     time(&timerPhase3);
+//   }
+//   cmdVelTwist.angular.z = 0;
+//   pubCmd.publish(cmdVelTwist);
 
-  float timeElapsed = difftime( timerPhase3, timerMissionStart); 
-  result.result.resultCode = "Time elapsed: " + std::to_string(timeElapsed);
-  // as->publishResult(result);
-  std::cout<<"succeed" << std::endl;
-  as->setSucceeded();
+//   float timeElapsed = difftime( timerPhase3, timerMissionStart); 
+//   result.result.resultCode = "Time elapsed: " + std::to_string(timeElapsed);
+//   // as->publishResult(result);
+//   std::cout<<"succeed" << std::endl;
+//   as->setSucceeded();
   
-};
+// };
 
 
 void tgrip::taskManager::odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsgPtr){

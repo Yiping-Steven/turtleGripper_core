@@ -122,12 +122,12 @@ namespace tgrip{
 
         // [CV]
         // all series (Irina, add whatever you want here)
-        ros::Subscriber cubePose;
+        ros::Subscriber subCube;
         ros::Publisher cubeTargetPub;
         bool cubeFound;
         bool cubeInView;
         double cubeDistance = 0.30; //target distance to the cube
-        move_base_msgs::MoveBaseActionGoal goalPose;
+        move_base_msgs::MoveBaseActionGoal targetPose;
         // geometry_msgs::PoseStamped targetPose;
         geometry_msgs::Point cubePoint;
       
