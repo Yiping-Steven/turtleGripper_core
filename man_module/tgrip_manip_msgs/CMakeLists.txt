@@ -9,7 +9,6 @@ project(tgrip_manip_msgs)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
-  open_manipulator_msgs
   std_msgs
   message_generation
 )
@@ -71,7 +70,7 @@ add_message_files(DIRECTORY msg)
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
-  geometry_msgs   open_manipulator_msgs   std_msgs
+  geometry_msgs   std_msgs
 )
 
 ################################################
@@ -106,7 +105,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES tgrip_manip_msgs
-  CATKIN_DEPENDS geometry_msgs open_manipulator_msgs std_msgs
+  CATKIN_DEPENDS geometry_msgs std_msgs
 #  DEPENDS system_lib
 )
 

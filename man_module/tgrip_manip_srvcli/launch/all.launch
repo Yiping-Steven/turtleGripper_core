@@ -5,14 +5,14 @@
 
   <!-- startup ros_control for real robot -->
   <group unless="$(arg sim)">
-    <include file="$(find open_manipulator_hw)/launch/open_manipulator_control.launch">
+    <include file="$(find om_hw)/launch/openmanipulator_control.launch">
       <arg name="usb_port" value="$(arg usb_port)"/>
     </include>
   </group>
 
   <!-- startup simulated world and spawn robot-->
   <group if="$(arg sim)">
-    <include file="$(find open_manipulator_hw)/launch/open_manipulator_gazebo.launch"/>
+    <include file="$(find om_hw)/launch/openmanipulator_gazebo.launch"/>
   </group>
 
   <!-- controller utils -->
@@ -31,4 +31,5 @@
   <!-- startup move_group related -->
   <include file="$(find om_moveit_config)/launch/move_group.launch"/>
   <include file="$(find om_moveit_config)/launch/moveit_rviz.launch"/>
+  
 </launch>

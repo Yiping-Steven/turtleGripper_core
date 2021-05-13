@@ -47,8 +47,8 @@ void server::goalCB(){
     target_pose1.orientation.z = goal.goal.pose.orientation.z;
     target_pose1.orientation.w = goal.goal.pose.orientation.w;
 
-    std::cout<<goal.goal.pose.position<<std::endl;
-    std::cout<<target_pose1.position<<std::endl;
+    // std::cout<<goal.goal.pose.position<<std::endl;
+    // std::cout<<target_pose1.position<<std::endl;
 
     //group.setPositionTarget(target_pose1.position.x,  target_pose1.position.y, target_pose1.position.z, "link5");
     group.setPoseTarget(target_pose1, "end_effector_link");
@@ -91,8 +91,8 @@ void server::goalCB(){
     target_pose.orientation.z = goal.goal.pose.orientation.z;
     target_pose.orientation.w = goal.goal.pose.orientation.w;
 
-    std::cout<<goal.goal.pose.position<<std::endl;
-    std::cout<<target_pose.position<<std::endl;
+    // std::cout<<goal.goal.pose.position<<std::endl;
+    // std::cout<<target_pose.position<<std::endl;
 
     group.setPoseTarget(target_pose, "end_effector_link");
     // group.setPositionTarget(target_pose.position.x,  target_pose.position.y, target_pose.position.z, "link5");

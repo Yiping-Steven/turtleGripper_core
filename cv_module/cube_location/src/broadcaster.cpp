@@ -17,8 +17,8 @@ int main( int argc, char** argv ){
   ros::Rate rate( 1 );
   tf::StampedTransform transform;
   
-  std::string world_name;
-  nhp.getParam( "world_name", world_name);
+  std::string world_name = "base_footprint";
+//  nhp.getParam( "world_name", world_name);
   
   ros::Publisher cube_publisher = nh.advertise<geometry_msgs::Point>("cube_position", 10);
   std::cout<<"Cube position advertised"<<std::endl;
