@@ -6,6 +6,7 @@
 #include<deque>
 #include<math.h>
 #include<geometry_msgs/Point.h>
+#include<cv_msgs/Cube.h>
 
 
 int main( int argc, char** argv ){
@@ -20,18 +21,21 @@ int main( int argc, char** argv ){
   std::string world_name = "base_footprint";
 //  nhp.getParam( "world_name", world_name);
   
-  ros::Publisher cube_publisher = nh.advertise<geometry_msgs::Point>("cube_position", 10);
+  ros::Publisher cube_publisher = nh.advertise<cv_msgs::Cube>("cube_position", 10);
   std::cout<<"Cube position advertised"<<std::endl;
   
   
   std::deque<std::vector<double>> cubeVec;//Buffer of the pose
   int nDec = 10; //Buffer size
-  bool cubeNotFound = true;
+ 
+  cv_msgs::Cube cube_detect;
+  cube_detect.cubeFound.data = false;//set to not found from the start
+
   while (nh.ok()){
 
     std::vector<double> res {0.0 ,0.0, 0.0};
-    //If the cube hasn't been seen yet, return nans
-    if (cubeNotFound) {
+    //If the cube hasn't been seen yet, return nans for its position
+    if ( !cube_detect.cubeFound.data ) {
       //Assign nan to the response
       for (int i=0; i<res.size(); i++){
 	res[i] = nanf("");
@@ -42,17 +46,16 @@ int main( int argc, char** argv ){
       //Get the Average Position from the vector
       for (int i = 0; i < cubeVec.size(); i++) {
         for (int k = 0; k < res.size(); k++) {
-    	  res[k] = res[k] + cubeVec[i][k];
+    	  res[k] = res[k] + cubeVec[i][k] / cubeVec.size();
 	}
       }
     }
 
     //Published cube pose
-    geometry_msgs::Point cube_pose;
-    cube_pose.x = res[0];
-    cube_pose.y = res[1];
-    cube_pose.z = res[2];    
-    cube_publisher.publish(cube_pose);
+    cube_detect.cubePosition.x = res[0];
+    cube_detect.cubePosition.y = res[1];
+    cube_detect.cubePosition.z = res[2];    
+    cube_publisher.publish(cube_detect);
     //    std::cout<<cube_pose.x<<cube_pose.y<<cube_pose.z<<std::endl;
     //    std::cout<<res[0]<<res[1]<<res[2]<<std::endl;
 
@@ -68,10 +71,14 @@ int main( int argc, char** argv ){
       cubeVec.push_back(cube_vec);
       std::cout<<"New cube pose acquired"<<std::endl;
       //Mark that the cube was found (only important for first sighting)
-      cubeNotFound = false;
+      cube_detect.cubeFound.data = true;
+      //Mark that cube is currently in view
+      cube_detect.cubeInView.data = true;
     }
     catch (tf::TransformException ex){
-      ROS_ERROR("%s",ex.what());
+      ROS_INFO("%s",ex.what());
+      //Cube cannot be seen right now
+      cube_detect.cubeInView.data = false;
     }
         
     //If deque has more than 5 items, pop the oldest

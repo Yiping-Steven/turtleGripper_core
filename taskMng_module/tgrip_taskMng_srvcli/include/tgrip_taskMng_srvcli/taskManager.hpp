@@ -19,7 +19,9 @@
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/Pose2D.h>
 #include <geometry_msgs/Twist.h>
-
+#include <geometry_msgs/Point.h>
+#include <geometry_msgs/PoseStamped.h>
+#include <move_base_msgs/MoveBaseActionGoal.h>
 // utilities
 #include <memory>
 #include <tf/tf.h>
@@ -120,7 +122,15 @@ namespace tgrip{
 
         // [CV]
         // all series (Irina, add whatever you want here)
-
+        ros::Subscriber subCube;
+        ros::Publisher cubeTargetPub;
+        bool cubeFound;
+        bool cubeInView;
+        double cubeDistance = 0.30; //target distance to the cube
+        move_base_msgs::MoveBaseActionGoal targetPose;
+        // geometry_msgs::PoseStamped targetPose;
+        geometry_msgs::Point cubePoint;
+      
     public:
 
         // functions, all series 
@@ -129,7 +139,7 @@ namespace tgrip{
                         tgrip_taskMng_msgs::serviceQuery::Response &res ); // almost done
         void odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsgPtr); // done
 
-
+        void cubeCallback(const geometry_msgs::Point& msg); // in progress
         // functions, task oriented
         void tskMeteredPatrolGoalCB();    // TODO, together
         void tskTimedPatrolGoalCB();    // TODO, together
