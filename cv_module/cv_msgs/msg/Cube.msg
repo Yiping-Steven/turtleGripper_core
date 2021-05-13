@@ -1,0 +1,3 @@
+std_msgs/Bool cubeInView
+std_msgs/Bool cubeFound
+geometry_msgs/Point cubePosition
