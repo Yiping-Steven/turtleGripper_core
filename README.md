@@ -20,7 +20,8 @@ Originated from a course project of  **Robot System Programming**
 mkdir -p ~/projects/tgrip_ws/src
 cd ~/projects/tgrip_ws/src
 catkin init
-git clone https://github.com/Yiping-Steven/turtleGripper.git
+git clone https://github.com/Yiping-Steven/turtleGripper_core.git
+git clone https://github.com/Yiping-Steven/turtleGripper_3rdParty.git
 catkin build
 ```
 
