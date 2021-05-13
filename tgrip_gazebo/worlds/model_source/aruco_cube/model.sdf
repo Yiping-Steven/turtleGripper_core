@@ -19,14 +19,14 @@
       <collision name="collision">
 	<geometry>
 	  <mesh>
-	    <uri>model://aruco_cube/meshes/aruco_cube.dae</uri>
+	    <uri>model://tgrip_gazebo/worlds/model_source/aruco_cube/meshes/aruco_cube.dae</uri>
 	  </mesh>
 	</geometry>
       </collision>
       <visual name="visual">
 	<geometry>
 	  <mesh>
-	    <uri>model://aruco_cube/meshes/aruco_cube.dae</uri>
+	    <uri>model://tgrip_gazebo/worlds/model_source/aruco_cube/meshes/aruco_cube.dae</uri>
 	  </mesh>
 	</geometry>
       </visual>
