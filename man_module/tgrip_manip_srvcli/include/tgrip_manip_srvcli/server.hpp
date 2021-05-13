@@ -20,14 +20,7 @@
 #include <moveit/robot_state/robot_state.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 //Open
-#include "open_manipulator_msgs/KinematicsPose.h"
-#include "open_manipulator_msgs/SetJointPosition.h"
-#include "open_manipulator_msgs/SetKinematicsPose.h"
-#include "open_manipulator_msgs/SetDrawingTrajectory.h"
-#include "open_manipulator_msgs/SetActuatorState.h"
-#include "open_manipulator_msgs/GetJointPosition.h"
-#include "open_manipulator_msgs/GetKinematicsPose.h"
-#include "open_manipulator_msgs/OpenManipulatorState.h"
+
 
 class server
 {

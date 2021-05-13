@@ -8,17 +8,9 @@
 
 
   <!-- startup open manipulator with moveit-->
-    <include file="$(find om_test)/launch/all.launch">
+    <include file="$(find tgrip_manip_srvcli)/launch/all.launch">
       <arg name="sim" value="$(arg sim)"/>
     </include> 
-
- <!-- move to start postion -->
-  <!-- <arg name="node_start_delay" default="5.0" />  
-  <node name="listener" pkg="roscpp_tutorials" type="listener" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
-
-
-  <node name="move_to_start" pkg="om_test" type="move_p" output="screen"/>  -->
-
   <node name="server_node" pkg="tgrip_manip_srvcli" type="server_node" 
    output="screen">
   </node>

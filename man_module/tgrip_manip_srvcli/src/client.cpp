@@ -1,74 +1,54 @@
 #include <tgrip_manip_srvcli/client.hpp>
 #include <cmath>
 
-// Called once when the goal completes
-void doneCb(const actionlib::SimpleClientGoalState& state,
-            const tgrip_manip_actions::pick_placeResultConstPtr& result)
-{
-  ROS_INFO("Finished in state [%s]", state.toString().c_str());
-  // ROS_INFO("Answer: %i", result->feedback_code.back());
-  // ros::shutdown();
-}
-
-// Called once when the goal becomes active
-void activeCb()
-{
-  ROS_INFO("Goal just went active");
-}
-
-// Called every time feedback is received for the goal
-void feedbackCb(const tgrip_manip_actions::pick_placeFeedbackConstPtr& feedback)
-{
-    // ROS_INFO("Got Feedback of length %lu", feedback->feedback_code.size());
-    ROS_INFO("%s",feedback->feedback_code.feedback_code.c_str());
-
-}
-
 client::client(ros::NodeHandle& nh): nh(nh){
-    //sub_fb = nh.subscribe("/action_server/feedback", 10, &client::feedbackCb, this);
+
+    
+    sub_cube = nh.subscribe("/cube_position", 10, &client::sendCb, this); //geometry_msgs::point
+
+
+}
+
+void client::sendCb(const geometry_msgs::Point& point)
+{
 
     actionlib::SimpleActionClient<tgrip_manip_actions::pick_placeAction> ac("action_server", true);
 
-   
     ac.waitForServer();
+
+    geometry_msgs::Point cube_point;
+    cube_point.x = point.x;
+    cube_point.y = point.y;
+    cube_point.z = point.z;
+
+    // std::cout<<cube_point<<std::endl;
 
     geometry_msgs::Pose pose;
 
-    pose.position.x = 0.42;
-    pose.position.y = -0.004;
-    pose.position.z = 0.012;
+    
+//0.430  0.015 0
+//0.417 0.0 0.1
+    pose.position.x = cube_point.x;
+    pose.position.y = cube_point.y;
+    pose.position.z = cube_point.z;
     pose.orientation.x = 0.0;
     pose.orientation.y = 0.0;
     pose.orientation.z = 0.0;
     pose.orientation.w = 1;
-    // std_msgs::Float64MultiArray position;
-    // position.layout.dim.push_back(std_msgs::MultiArrayDimension());
-    // position.layout.dim[0].label = "postion";
-    // position.layout.dim[0].size = 3;
-    // position.layout.dim[0].stride = 1;
-    // position.layout.data_offset = 0;
-    // float xp = 0.2;
- 
-    // position.data.push_back(0.4);//x
-    // position.data.push_back(-0.2);//y
-    // position.data.push_back(0.0);//z
-    
-    //std::cout << position << std::endl;
-    
 
     tgrip_manip_actions::pick_placeGoal goal;
+
     goal.goal.pose = pose;
 
-    for(int i=0;i<1;i++){
-
-        ac.sendGoal(goal, &doneCb, &activeCb, &feedbackCb);
+    // std::cout<<pose<<std::endl;
+  
+  ac.sendGoal(goal);
         
-        bool res = ac.waitForResult( ros::Duration(30.0));
+  bool res = ac.waitForResult( ros::Duration(30.0));
 
-        actionlib::SimpleClientGoalState state = ac.getState();
+  actionlib::SimpleClientGoalState state = ac.getState();
         
-        std::cout << state.toString().c_str() << std::endl;
-        std::string result_s = state.toString();
+  std::cout << state.toString().c_str() << std::endl;
+  std::string result_s = state.toString();
 
-    }
 }
