@@ -12,5 +12,8 @@ int main(int argc, char** argv){
 
     client client(nh);
 
+    ros::MultiThreadedSpinner spinner(2);
+    spinner.spin();
+    
     return 0;
 }

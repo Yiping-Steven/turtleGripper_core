@@ -108,7 +108,7 @@ find_package( Eigen3 REQUIRED )
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-  LIBRARIES tgrip_manip_srvcli
+  # LIBRARIES tgrip_manip_srvcli
   CATKIN_DEPENDS actionlib roscpp tgrip_manip_actions
   DEPENDS 
   EIGEN3
