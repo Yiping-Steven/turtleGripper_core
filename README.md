@@ -68,7 +68,7 @@ source /home/project/tgrip_ws/devel/setup.bash
 roscore
 ```
 
-### 1. To run the simulation environment
+### 1. To run the simulation environment or the hardware
 
 ```bash
 roslaunch tgrip_gazebo simulation.launch gui:=false #for silence, specify "gui" 
@@ -85,22 +85,23 @@ roslaunch tgrip_nav_srvcli minimal.launch
 ```jsx
 roslaunch tgrip_description tgrip_description.launch
 ```
+We have an issue that forces us to load robot_description separately.
 
 ### 3. For SLAM
 
-We have prebuilt map for the gazebo simulation environment.
+We have prebuilt map for the gazebo simulation environment (make sure you choose simulation in Step 1):
 
 ```jsx
-roslaunch tgrip_nav_srvcli amcl_demo.launch
+roslaunch tgrip_nav_srvcli amcl_demo.launch #
 ```
 
-or if you choose the real world in step 2 and have a map for the environment (eg. my appartment)
+or if you choose the real world in Step 1 and have a map for the environment (eg. my appartment)
 
 ```jsx
 roslaunch tgrip_nav_srvcli amcl_apartment.launch
 ```
 
-or if you built your own simulated or real world environment and want to create a map:
+or if you built your own simulated or real world environment and want to create a map.  (It doesn't matter what you chose in Step 1)
 
 ```jsx
 roslaunch tgrip_nav_srvcli gmapping_demo.launch
