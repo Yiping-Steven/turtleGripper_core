@@ -31,6 +31,7 @@ catkin build
 sudo apt install ros-kinetic-turtlebot-bringup # to drive the turtlebot base
 sudo apt install ros-kinetic-urg-node # to drive the lidar
 sudo apt-get install ros-kinetic-ros-controllers ros-kinetic-gazebo* ros-kinetic-moveit* ros-kinetic-industrial-core # to drive manipulator
+sudo apt-get install ros-kinetic-aruco-ros #to detect AR tags
 ```
 
 # B. Configuration
