@@ -2,7 +2,7 @@
 A mobile manipulator robot designed for household usage. Let's realize the dream of throwing your socks freeeeeely!
 So far the turtleGripper (or "tgrip") can do:
 1. Picking up the target from the ground. ( in real world [1] )
-2. Building a map both in simulation[2] and in real world[3].
+2. Building a map both in simulation[[2]](https://kapwi.ng/c/ORo6ed82) and in real world[3].
 3. Navigating in the known environment, both in simulation[4] and in real world[5]
 4. Recognizing targets. (Both in simulation [5] and in real world [6] )
 
@@ -96,7 +96,7 @@ roslaunch tgrip_nav_srvcli amcl_demo.launch
 or if you choose the real world in step 2 and have a map for the environment (eg. my appartment)
 
 ```jsx
-roslaunch tgrip_nav_srvcli amcl_appartment.launch
+roslaunch tgrip_nav_srvcli amcl_apartment.launch
 ```
 
 or if you built your own simulated or real world environment and want to create a map:
