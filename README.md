@@ -120,7 +120,7 @@ roslaunch tgrip_nav_srvcli view_navigation.launch
 ```
 
 ### 6. Start the manager node 
-Still has some error by May 13, 2021.
+Passed compilation but still haven't been fully tested, by May 13, 2021.
 
 ```
 rosrun tgrip_mng_srvcli client_node
