@@ -2,7 +2,7 @@
 A mobile manipulator robot designed for household usage.
 Let's realize the dream of throwing your socks freeeeeely!
 
-Originated from a course project of  **Robot System Programming**
+Originated from a course project of  EN.530.707 **Robot System Programming**.
 
 **Mentor**: [Simon Leonard](https://www.cs.jhu.edu/~sleonard/)
 
@@ -106,7 +106,9 @@ roslaunch tgrip_nav_srvcli gmapping_demo.launch
 roslaunch tgrip_nav_srvcli view_navigation.launch
 ```
 
-### 5. Start the manager node (Still has some error by May 13, 2021)
+### 5. Start the manager node 
+Still has some error by May 13, 2021.
+
 ```
 rosrun tgrip_mng_srvcli client_node
 ```
