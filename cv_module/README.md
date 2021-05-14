@@ -1,15 +1,4 @@
-# CV Module Description
-
-Created: May 13, 2021 5:38 PM
-Engineers: Irina Bataeva
-Epic: https://www.notion.so/Software-System-Framework-8e121d3bdc104983b6be812a274d225e
-Priority: P1 🔥
-Sprint: Sprint_CV
-Status: In Progress
-Timeline: Mar 30, 2021 → Apr 24, 2021
-Type: Task 🔨
-
-# Module Info
+# CV Module Info
 
 This module consisting of 4 packages, detects the location of the cube covered with aruco markers. The current version of the module works on a cube covered with 2"x2" aruco markers #0 ,#1, and #2 from Aruco Original library. To use the module do:
 
@@ -17,7 +6,6 @@ This module consisting of 4 packages, detects the location of the cube covered w
 roslaunch cube_location find_cube.launch
 ```
 
-# Overview
 
 # Dependencies / Requirements
 
