@@ -105,13 +105,19 @@ or if you built your own simulated or real world environment and want to create 
 roslaunch tgrip_nav_srvcli gmapping_demo.launch
 ```
 
-### 4. For visualization
+### 4. For cube detection
+
+```jsx
+roslaunch tgrip_cv_cube find_cube.launch
+```
+
+### 5. For visualization (RViz)
 
 ```jsx
 roslaunch tgrip_nav_srvcli view_navigation.launch
 ```
 
-### 5. Start the manager node 
+### 6. Start the manager node 
 Still has some error by May 13, 2021.
 
 ```
