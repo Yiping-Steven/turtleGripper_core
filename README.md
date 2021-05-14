@@ -1,6 +1,10 @@
 # TurtleGripper
-A mobile manipulator robot designed for household usage.
-Let's realize the dream of throwing your socks freeeeeely!
+A mobile manipulator robot designed for household usage. Let's realize the dream of throwing your socks freeeeeely!
+So far the turtleGripper (or "tgrip") can do:
+1. Picking up the target from the ground. ( in real world [1] )
+2. Building a map both in simulation[2] and in real world[3].
+3. Navigating in the known environment, both in simulation[4] and in real world[5]
+4. Recognizing targets. (Both in simulation [5] and in real world [6] )
 
 Originated from a course project of  EN.530.707 **Robot System Programming**.
 
