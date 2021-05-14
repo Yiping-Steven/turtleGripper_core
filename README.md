@@ -1,8 +1,12 @@
 # TurtleGripper
-A mobile manipulator robot designed for household usage.
-Let's realize the dream of throwing your socks freeeeeely!
+A mobile manipulator robot designed for household usage. Let's realize the dream of throwing your socks freeeeeely!
+So far the turtleGripper (or "tgrip") can do:
+1. Picking up the target from the ground. ( in real world [1] )
+2. Building a map both in simulation[2] and in real world[3].
+3. Navigating in the known environment, both in simulation[4] and in real world[5]
+4. Recognizing targets. (Both in simulation [5] and in real world [6] )
 
-Originated from a course project of  **Robot System Programming**
+Originated from a course project of  EN.530.707 **Robot System Programming**.
 
 **Mentor**: [Simon Leonard](https://www.cs.jhu.edu/~sleonard/)
 
@@ -107,7 +111,9 @@ roslaunch tgrip_nav_srvcli gmapping_demo.launch
 roslaunch tgrip_nav_srvcli view_navigation.launch
 ```
 
-### 5. Start the manager node (Still has some error by May 13, 2021)
+### 5. Start the manager node 
+Still has some error by May 13, 2021.
+
 ```
 rosrun tgrip_mng_srvcli client_node
 ```
