@@ -145,7 +145,7 @@ add_executable(broadcaster_node src/broadcaster_node.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(broadcaster_node ${catkin_LIBRARIES} marker_tf_broadcast)
+target_link_libraries(  marker_tf_broadcast ${catkin_LIBRARIES} )
 
 #############
 ## Install ##
