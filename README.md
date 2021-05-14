@@ -96,7 +96,7 @@ roslaunch tgrip_nav_srvcli amcl_demo.launch
 or if you choose the real world in step 2 and have a map for the environment (eg. my appartment)
 
 ```jsx
-roslaunch tgrip_nav_srvcli amcl_appartment.launch
+roslaunch tgrip_nav_srvcli amcl_apartment.launch
 ```
 
 or if you built your own simulated or real world environment and want to create a map:
