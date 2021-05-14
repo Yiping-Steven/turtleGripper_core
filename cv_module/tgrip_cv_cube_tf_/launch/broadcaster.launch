@@ -1,15 +1,14 @@
 <?xml version="1.5"?>
 
 <launch>
-  <arg name="marker_name" default="aruco_single_0"/>
+  <arg name="marker_name" default="aruco_single_1"/>
   <arg name="world_name" default="base_link"/>
-
   <node
-    pkg = "marker_tf_broadcast"
+    pkg = "tgrip_cv_cube_tf"
     type = "broadcaster_node"
-    name = "aruco_tf_broadcaster_$(arg marker_name)"
+    name = "cube_tf_broadcaster_$(arg marker_name)"
     output = "screen">
-    <param name = "marker_name" value = "$(arg marker_name)"/>
+    <param name = "marker_name" value = "$(arg marker_name)"/>    
     <param name = "world_name" value = "$(arg world_name)" />
   </node>
 

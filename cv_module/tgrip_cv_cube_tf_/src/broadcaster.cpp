@@ -4,11 +4,10 @@
 #include<string>
 #include<geometry_msgs/PoseStamped.h>
 
-//#include<geometry_msgs/TransformStamped.h>
 
 void callback(const geometry_msgs::PoseStamped& msg){
-  //thank you to this tutorial http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20broadcaster%20%28C%2B%2B%29
-
+  //Callback calculates pose of the cube by translating marker pose along y axis
+  
   ros::NodeHandle nhp("~");
   tf::TransformBroadcaster bc;
   tf::Transform transform;
@@ -16,7 +15,6 @@ void callback(const geometry_msgs::PoseStamped& msg){
   std::string marker_name;
   nhp.getParam( "marker_name", marker_name );
   
-  //  std::cout<<"Callbalck"<<std::endl;
 
   transform.setOrigin( tf::Vector3(0.0, -0.028, 0.0) );
   transform.setRotation( tf::Quaternion(0, 0, 0, 1) );

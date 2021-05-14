@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>cube_location</name>
+  <name>tgrip_cv_cube</name>
   <version>0.0.0</version>
   <description>The cube_location package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="ibataeva@todo.todo">ibataeva</maintainer>
+  <maintainer email="bataeva.irina@gmail.com">ibataeva</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -50,15 +50,15 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>geometry_msgs</build_depend>
-  <build_depend>cv_msgs</build_depend>
+  <build_depend>tgrip_cv_msgs</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>tf</build_depend>
   <build_export_depend>geometry_msgs</build_export_depend>
-  <build_export_depend>cv_msgs</build_export_depend>
+  <build_export_depend>tgrip_cv_msgs</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>tf</build_export_depend>
   <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>cv_msgs</exec_depend>
+  <exec_depend>tgrip_cv_msgs</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>tf</exec_depend>
 

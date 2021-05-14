@@ -3,7 +3,7 @@
 <launch>
   <arg name="world_name" default="map"/>
   <node
-    pkg = "cube_location"
+    pkg = "tgrip_cv_cube"
     type = "publisher_node"
     name = "cube_loc_broadcaster"
     output = "screen">    
