@@ -8,7 +8,7 @@ project(tgrip_nav_srvcli)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  actionlib
+  actionlib move_base_msgs roscpp tf
   tgrip_nav_actions
 )
 
@@ -133,6 +133,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/tgrip_nav_srvcli_node.cpp)
+add_executable(simple_navigation_goals src/simple_navigation_goals.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -148,6 +149,7 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+target_link_libraries(simple_navigation_goals ${catkin_LIBRARIES})
 
 #############
 ## Install ##
