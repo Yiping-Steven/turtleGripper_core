@@ -4,10 +4,8 @@
 #include<string>
 #include<geometry_msgs/PoseStamped.h>
 
-//#include<geometry_msgs/TransformStamped.h>
-
 void callback(const geometry_msgs::PoseStamped& msg){
-  //thank you to this tutorial http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20broadcaster%20%28C%2B%2B%29
+  //Callback broadcasts the TF of the marker
 
   ros::NodeHandle nhp("~");
   tf::TransformBroadcaster bc;
