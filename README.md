@@ -106,7 +106,7 @@ roslaunch tgrip_nav_srvcli gmapping_demo.launch
 roslaunch tgrip_nav_srvcli view_navigation.launch
 ```
 
-### 5. Start the manager node
+### 5. Start the manager node (Still has some error by May 13, 2021)
 ```
 rosrun tgrip_mng_srvcli client_node
 ```
