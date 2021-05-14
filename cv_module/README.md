@@ -2,7 +2,7 @@
 
 This module consisting of 4 packages, detects the location of the cube covered with aruco markers. The current version of the module works on a cube covered with 2"x2" aruco markers #0 ,#1, and #2 from Aruco Original library. To use the module do:
 
-```cpp
+```jsx
 roslaunch cube_location find_cube.launch
 ```
 
@@ -22,7 +22,7 @@ The robot description and mapping nodes must be running in order to successfully
 
 Alternatively, to just get a tf of the cube's center without doing any mapping etc. you can run:
 
-```cpp
+```jsx
 roslaunch cube_tf_broadcast all_tag_broadcaster.launch world_name:={name_of_frame_that_exists}
 ```
 
