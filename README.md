@@ -1,6 +1,7 @@
 # TurtleGripper
 A mobile manipulator robot designed for household usage. Let's realize the dream of throwing your socks freeeeeely!
 
+# Demos
 By May 13th, the turtleGripper (or "tgrip") can do:
 1. Building a map both in simulation[[1]](https://kapwi.ng/c/ORo6ed82) and in real world[[2]](https://rsp-vja7544.slack.com/files/U01PKF49S1G/F021Y2Q1599/image_from_ios.mov).
 2. Navigating in the known environment, both in simulation[[3]](https://kapwi.ng/c/UrDYlY7T) and in real world[4]
