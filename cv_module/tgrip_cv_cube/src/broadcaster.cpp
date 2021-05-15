@@ -6,7 +6,7 @@
 #include<deque>
 #include<math.h>
 #include<geometry_msgs/Point.h>
-#include<cv_msgs/Cube.h>
+#include<tgrip_cv_msgs/Cube.h>
 
 
 int main( int argc, char** argv ){
@@ -18,17 +18,17 @@ int main( int argc, char** argv ){
   ros::Rate rate( 1 );
   tf::StampedTransform transform;
   
-  std::string world_name = "base_footprint";
-//  nhp.getParam( "world_name", world_name);
+  std::string world_name;
+  nhp.getParam( "world_name", world_name);
   
-  ros::Publisher cube_publisher = nh.advertise<cv_msgs::Cube>("cube_position", 10);
+  ros::Publisher cube_publisher = nh.advertise<tgrip_cv_msgs::Cube>("cube_position", 10);
   std::cout<<"Cube position advertised"<<std::endl;
   
   
   std::deque<std::vector<double>> cubeVec;//Buffer of the pose
   int nDec = 10; //Buffer size
  
-  cv_msgs::Cube cube_detect;
+  tgrip_cv_msgs::Cube cube_detect;
   cube_detect.cubeFound.data = false;//set to not found from the start
 
   while (nh.ok()){
@@ -38,7 +38,7 @@ int main( int argc, char** argv ){
     if ( !cube_detect.cubeFound.data ) {
       //Assign nan to the response
       for (int i=0; i<res.size(); i++){
-	res[i] = nanf("");
+	      res[i] = nanf("");
       }
   
     } else { 
