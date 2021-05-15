@@ -11,15 +11,14 @@
   <xacro:include filename="$(find openmanipulator_description)/urdf/hexagons.urdf.xacro"/>
   
   <!-- Import manip -->
-  <!-- customized for nav module -->
-  <xacro:include filename="$(find openmanipulator_description)/urdf/open_manipulator_nav.urdf.xacro" />
-  <xacro:include filename="$(find openmanipulator_description)/urdf/open_manipulator_nav.gazebo.xacro" />
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find open_manipulator_description)/urdf/materials.xacro" />
   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <!-- <xacro:include filename="$(find open_manipulator_description)/urdf/open_manipulator.gazebo.xacro" /> -->
   <!-- Import Transmission -->
   <xacro:include filename="$(find open_manipulator_description)/urdf/open_manipulator.transmission.xacro" />
   <!-- Import URDF -->
+  <!-- <xacro:include filename="$(find open_manipulator_description)/urdf/open_manipulator.urdf.xacro" /> -->
   <!-- World fixed joint-->
   <joint name="fix_world" type="fixed">
     <origin xyz="0.16 -0.08 0.15" rpy="0 0 ${-pi/2}"/>
@@ -28,6 +27,10 @@
   </joint>
   <!-- Import manip -->
 
+<!-- for nav module -->
+  <xacro:include filename="$(find openmanipulator_description)/urdf/open_manipulator_nav.urdf.xacro" />
+  <xacro:include filename="$(find openmanipulator_description)/urdf/open_manipulator_nav.gazebo.xacro" />
+<!-- for nav module -->
 
   <!-- Import work space -->
   <xacro:include filename="$(find openmanipulator_description)/urdf/open_manipulator_workspace.urdf.xacro" />
