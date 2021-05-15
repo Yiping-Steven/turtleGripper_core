@@ -129,7 +129,7 @@ namespace tgrip{
         bool cubeInView;
         double cubeDistance = 0.30; //target distance to the cube
         move_base_msgs::MoveBaseActionGoal goal;
-        // geometry_msgs::PoseStamped targetPose;
+        geometry_msgs::PoseStamped targetPose;
         geometry_msgs::Point cubePoint;
       
     public:
@@ -142,13 +142,13 @@ namespace tgrip{
 
         void cubeCallback( const cv_msgs::Cube& cube_detect ); // in progress
         // functions, task oriented
-        void tskMeteredPatrolGoalCB();    // TODO, together
         void tskTimedPatrolGoalCB();    // TODO, together
-        void tskFetchingGoalCB();       // TODO, Yiping's assignment
-        void tskMappingGoalCB();        //TODO, Yiping's assignment
+        // void tskMeteredPatrolGoalCB();    // TODO, together
+        // void tskFetchingGoalCB();       // TODO, Yiping's assignment
+        // void tskMappingGoalCB();        //TODO, Yiping's assignment
 
-        void tskGlobalNavigation(); // TODO, Yiping's and Irina's assignment
-        void tskLocalManeuver(); // TODO, Irina and Jian's assignment
-        void tskLocalManipulation(); // TODO, Jian's assignment        
+        // void tskGlobalNavigation(); // TODO, Yiping's and Irina's assignment
+        // void tskLocalManeuver(); // TODO, Irina and Jian's assignment
+        // void tskLocalManipulation(); // TODO, Jian's assignment        
     };
 }

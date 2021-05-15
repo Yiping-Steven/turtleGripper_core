@@ -145,7 +145,7 @@ add_library( tgrip_taskClient
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable( taskManager_node src/server_node.cpp)
+add_executable( taskServer_node src/server_node.cpp)
 add_executable( taskClient_node src/client_node.cpp)
 
 ## Rename C++ executable without prefix
@@ -159,7 +159,11 @@ add_executable( taskClient_node src/client_node.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries( taskManager_node
+target_link_libraries( tgrip_taskManager
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries( taskServer_node
   ${catkin_LIBRARIES}
   tgrip_taskManager
 )
@@ -168,6 +172,7 @@ target_link_libraries( taskClient_node
   ${catkin_LIBRARIES}
   tgrip_taskClient
 )
+
 #############
 ## Install ##
 #############

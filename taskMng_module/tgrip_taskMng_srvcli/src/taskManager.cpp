@@ -44,11 +44,11 @@ bool tgrip::taskManager::tskMngSrvCB( tgrip_taskMng_msgs::serviceQuery::Request 
 void tgrip::taskManager::tskTimedPatrolGoalCB(){
   cubeFound = false;
   subCube = nh.subscribe("/cube_position", 10, & taskManager::cubeCallback, this);
-  cubeTargetPub =  nh.advertise<move_base_msgs::MoveBaseActionGoal>("/move_base/goal",10);  
+  cubeTargetPub =  nh.advertise<move_base_msgs::MoveBaseActionGoal>("/move_base_simple/goal",10);  
   if (cubeFound){
     //Publish the new goal
     cubeTargetPub.publish(goal);
-  } 
+  }
 
     
   // 1. tskGlobalNavigation()
@@ -86,13 +86,6 @@ void tgrip::taskManager::tskTimedPatrolGoalCB(){
 
 
 }
-
-
-
-
-void tgrip::taskManager::tskMeteredPatrolGoalCB(){
-  // very similar to tskTimedPatrolGoalCB, difference is merely the termination condition
-};
 
 
 
@@ -190,7 +183,7 @@ void tgrip::taskManager::odomCallback(const nav_msgs::Odometry::ConstPtr& odomMs
 
 
 void tgrip::taskManager::cubeCallback( const cv_msgs::Cube& cube_detect ){
-  //Find the pose cubeDistance away from the cube 
+  // //Find the pose cubeDistance away from the cube 
   if ( cube_detect.cubeFound.data ) {
     cubeFound = true;
     cubePoint.x = cube_detect.cubePosition.x;
