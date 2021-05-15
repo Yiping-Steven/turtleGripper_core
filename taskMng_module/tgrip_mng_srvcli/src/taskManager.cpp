@@ -1,17 +1,17 @@
-#include <tgrip_taskMng_srvcli/taskManager.hpp>
-// #include <tgrip_taskMng_srvcli/subTaskServer.hpp>
+#include <tgrip_mng_srvcli/taskManager.hpp>
+// #include <tgrip_mng_srvcli/subTaskServer.hpp>
 
 tgrip::taskManager::taskManager (ros::NodeHandle& nh): nh( nh ){
 
-  taskServer = nh.advertiseService("tgrip::taskManager", &tgrip::taskManager::tskMngSrvCB, this);
+  taskServer = nh.advertiseService("tgrip_mng_service", &tgrip::taskManager::tskMngSrvCB, this);
   subOdom = nh.subscribe("/odometry/filtered", 1000, & taskManager::odomCallback, this);
-  pubCmd = nh.advertise<geometry_msgs::Twist>("/tskManager/cmd_vel", 10);
+  pubCmd = nh.advertise<geometry_msgs::Twist>("/tgrip_mng_server/cmd_vel", 10);
 
 }
 
 
-bool tgrip::taskManager::tskMngSrvCB( tgrip_taskMng_msgs::serviceQuery::Request &req,
-                  tgrip_taskMng_msgs::serviceQuery::Response &res ){
+bool tgrip::taskManager::tskMngSrvCB( tgrip_mng_msgs::serviceQuery::Request &req,
+                  tgrip_mng_msgs::serviceQuery::Response &res ){
 
 
   // switch between all sorts of tasks
@@ -90,7 +90,7 @@ void tgrip::taskManager::tskTimedPatrolGoalCB(){
 
 
 // void tgrip::taskManager::tskFetchingGoalCB(){
-//   std::cout << "taskMngServer::goalCB" << std::endl;
+//   std::cout << "mngServer::goalCB" << std::endl;
 //   goal = *(as->acceptNewGoal());
 //   std::cout << "New Goal Received:  ("<< goal.goal.poseGoal.x << ", "
 //                                       << goal.goal.poseGoal.y << ", "
@@ -182,7 +182,7 @@ void tgrip::taskManager::odomCallback(const nav_msgs::Odometry::ConstPtr& odomMs
 }
 
 
-void tgrip::taskManager::cubeCallback( const cv_msgs::Cube& cube_detect ){
+void tgrip::taskManager::cubeCallback( const tgrip_cv_msgs::Cube& cube_detect ){
   // //Find the pose cubeDistance away from the cube 
   if ( cube_detect.cubeFound.data ) {
     cubeFound = true;

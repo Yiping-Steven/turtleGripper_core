@@ -1,5 +1,5 @@
-tgrip_taskMng_msgs/tskTimedPatrolGoal goal
+tgrip_mng_msgs/tskTimedPatrolGoal goal
 ---
-tgrip_taskMng_msgs/tskTimedPatrolResult result
+tgrip_mng_msgs/tskTimedPatrolResult result
 ---
-tgrip_taskMng_msgs/tskTimedPatrolFeedback feedback
+tgrip_mng_msgs/tskTimedPatrolFeedback feedback

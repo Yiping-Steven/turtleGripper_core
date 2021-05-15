@@ -1,5 +1,0 @@
-string queryStr # the status of interest
-int32 queryCode
----
-string replyStr # to the specific status of the query, or can be a briefing report of all status
-int32 replyCode

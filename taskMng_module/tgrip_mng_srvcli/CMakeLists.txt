@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(tgrip_taskMng_srvcli)
+project(tgrip_mng_srvcli)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -11,10 +11,10 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib
   actionlib_msgs
 
-  tgrip_taskMng_actions
+  tgrip_mng_actions
   roscpp
-  tgrip_taskMng_msgs
-  cv_msgs
+  tgrip_mng_msgs
+  tgrip_cv_msgs
   message_generation
 )
 
@@ -76,8 +76,8 @@ find_package(catkin REQUIRED COMPONENTS
 generate_messages(
   DEPENDENCIES
   actionlib_msgs
-  tgrip_taskMng_msgs
-  cv_msgs
+  tgrip_mng_msgs
+  tgrip_cv_msgs
   std_msgs  # Or other packages containing msgs
 )
 
@@ -112,8 +112,8 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES tgrip_taskMng_srvcli
- CATKIN_DEPENDS actionlib tgrip_taskMng_actions message_runtime actionlib_msgs
+#  LIBRARIES tgrip_mng_srvcli
+ CATKIN_DEPENDS actionlib tgrip_mng_actions message_runtime actionlib_msgs
 #  DEPENDS system_lib
 )
 
@@ -220,7 +220,7 @@ target_link_libraries( taskClient_node
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_tgrip_taskMng_srvcli.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_tgrip_mng_srvcli.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

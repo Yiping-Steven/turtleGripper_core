@@ -2,19 +2,19 @@
 
 // actions
 //[Nav]
-// #include <tgrip_taskMng_actions/navMoveAction.h>
-// #include <tgrip_taskMng_actions/navExploreAction.h>
-// #include <tgrip_taskMng_actions/navManeuverAction.h>
-// #include <tgrip_taskMng_actions/navReturnAction.h>
+// #include <tgrip_mng_actions/navMoveAction.h>
+// #include <tgrip_mng_actions/navExploreAction.h>
+// #include <tgrip_mng_actions/navManeuverAction.h>
+// #include <tgrip_mng_actions/navReturnAction.h>
 //[Man]
-// #include <tgrip_taskMng_actions/manPickAction.h>
-// #include <tgrip_taskMng_actions/manPlaceAction.h>
+// #include <tgrip_mng_actions/manPickAction.h>
+// #include <tgrip_mng_actions/manPlaceAction.h>
 #include <actionlib/server/simple_action_server.h>
 #include <actionlib/client/simple_action_client.h>
 //[Task]
-#include <tgrip_taskMng_actions/tskManageAction.h>
-#include <tgrip_taskMng_actions/tskTimedPatrolAction.h>
-#include <tgrip_taskMng_msgs/serviceQuery.h>
+#include <tgrip_mng_actions/tskManageAction.h>
+#include <tgrip_mng_actions/tskTimedPatrolAction.h>
+#include <tgrip_mng_msgs/serviceQuery.h>
 // msgs
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/Pose2D.h>
@@ -22,7 +22,7 @@
 #include <geometry_msgs/Point.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <move_base_msgs/MoveBaseActionGoal.h>
-#include <cv_msgs/Cube.h>
+#include <tgrip_cv_msgs/Cube.h>
 // utilities
 #include <memory>
 #include <tf/tf.h>
@@ -40,17 +40,17 @@ namespace tgrip{
 
         /* ***********************************types definition***********************************  */
         //Tasks
-        // typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskMeteredPatrolAction> tskMeteredPatrolActionServer;
-        typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskTimedPatrolAction> tskTimedPatrolActionServer;
-        // typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskFetchingAction> tskFetchingActionServer;
-        // typedef actionlib::SimpleActionServer<tgrip_taskMng_actions::tskMappingAction> tskMappingActionServer;
+        // typedef actionlib::SimpleActionServer<tgrip_mng_actions::tskMeteredPatrolAction> tskMeteredPatrolActionServer;
+        typedef actionlib::SimpleActionServer<tgrip_mng_actions::tskTimedPatrolAction> tskTimedPatrolActionServer;
+        // typedef actionlib::SimpleActionServer<tgrip_mng_actions::tskFetchingAction> tskFetchingActionServer;
+        // typedef actionlib::SimpleActionServer<tgrip_mng_actions::tskMappingAction> tskMappingActionServer;
         // subTasks
-        // typedef actionlib::SimpleActionClient<tgrip_taskMng_actions::navMoveAction> navMoveActionClient;
-        // typedef actionlib::SimpleActionClient<tgrip_taskMng_actions::navExploreAction> navExploreActionClient;
-        // typedef actionlib::SimpleActionClient<tgrip_taskMng_actions::navManeuverAction> navManeuverActionClient;
-        // typedef actionlib::SimpleActionClient<tgrip_taskMng_actions::navReturnAction> navReturnActionClient;
-        // typedef actionlib::SimpleActionClient<tgrip_taskMng_actions::manPlaceAction> manPlaceActionClient;
-        // typedef actionlib::SimpleActionClient<tgrip_taskMng_actions::manPickAction> manPickActionClient;
+        // typedef actionlib::SimpleActionClient<tgrip_mng_actions::navMoveAction> navMoveActionClient;
+        // typedef actionlib::SimpleActionClient<tgrip_mng_actions::navExploreAction> navExploreActionClient;
+        // typedef actionlib::SimpleActionClient<tgrip_mng_actions::navManeuverAction> navManeuverActionClient;
+        // typedef actionlib::SimpleActionClient<tgrip_mng_actions::navReturnAction> navReturnActionClient;
+        // typedef actionlib::SimpleActionClient<tgrip_mng_actions::manPlaceAction> manPlaceActionClient;
+        // typedef actionlib::SimpleActionClient<tgrip_mng_actions::manPickAction> manPickActionClient;
 
     private:
 
@@ -73,7 +73,7 @@ namespace tgrip{
         bool batteryStatus;
 
         // task related
-        // std::vector<cv_msgs::target>  targetList; // create a target message type that stores the pose and certainty 
+        // std::vector<tgrip_cv_msgs::target>  targetList; // create a target message type that stores the pose and certainty 
         ros::Publisher pubCmd; // for publishing movement command
         ros::Subscriber subOdom; // for updating the real time pose.
         ros::ServiceServer taskServer;
@@ -100,25 +100,25 @@ namespace tgrip{
 
         // [Nav]
         // actions
-        // tgrip_taskMng_actions::navExploreGoal navExploreGoal; // explore for a distance, time, location or a coverage (advanced) 
-        // tgrip_taskMng_actions::navExploreFeedback navExploreFeedback;
-        // tgrip_taskMng_actions::navExploreResult navExploreResult;
-        // tgrip_taskMng_actions::navManeuverGoal navManeuverGoal; // maneuver for an angle range
-        // tgrip_taskMng_actions::navManeuverFeedback navManeuverFeedback;
-        // tgrip_taskMng_actions::navManeuverResult navManeuverResult;
-        // tgrip_taskMng_actions::navReturnGoal navReturnGoal; // return to a base location
-        // tgrip_taskMng_actions::navReturnFeedback navReturnFeedback;
-        // tgrip_taskMng_actions::navReturnResult navReturnResult;
+        // tgrip_mng_actions::navExploreGoal navExploreGoal; // explore for a distance, time, location or a coverage (advanced) 
+        // tgrip_mng_actions::navExploreFeedback navExploreFeedback;
+        // tgrip_mng_actions::navExploreResult navExploreResult;
+        // tgrip_mng_actions::navManeuverGoal navManeuverGoal; // maneuver for an angle range
+        // tgrip_mng_actions::navManeuverFeedback navManeuverFeedback;
+        // tgrip_mng_actions::navManeuverResult navManeuverResult;
+        // tgrip_mng_actions::navReturnGoal navReturnGoal; // return to a base location
+        // tgrip_mng_actions::navReturnFeedback navReturnFeedback;
+        // tgrip_mng_actions::navReturnResult navReturnResult;
         // all series (Yiping, add whatever you want here.)
 
         // [Man]
         // actions
-        // tgrip_taskMng_actions::manPickGoal manPickGoal; // pick for a 3D pose
-        // tgrip_taskMng_actions::manPickFeedback manPickFeedback;
-        // tgrip_taskMng_actions::manPickResult manPickResult;
-        // tgrip_taskMng_actions::manPlaceGoal manPlaceGoal; // place for a 3D pose
-        // tgrip_taskMng_actions::manPlaceFeedback manPlaceFeedback;
-        // tgrip_taskMng_actions::manPlaceResult manPlaceResult;
+        // tgrip_mng_actions::manPickGoal manPickGoal; // pick for a 3D pose
+        // tgrip_mng_actions::manPickFeedback manPickFeedback;
+        // tgrip_mng_actions::manPickResult manPickResult;
+        // tgrip_mng_actions::manPlaceGoal manPlaceGoal; // place for a 3D pose
+        // tgrip_mng_actions::manPlaceFeedback manPlaceFeedback;
+        // tgrip_mng_actions::manPlaceResult manPlaceResult;
         // all series (Jian, add whatever you want here.)
 
         // [CV]
@@ -136,11 +136,11 @@ namespace tgrip{
 
         // functions, all series 
         taskManager(ros::NodeHandle& nh);  // framework done
-        bool tskMngSrvCB( tgrip_taskMng_msgs::serviceQuery::Request &req,
-                        tgrip_taskMng_msgs::serviceQuery::Response &res ); // almost done
+        bool tskMngSrvCB( tgrip_mng_msgs::serviceQuery::Request &req,
+                        tgrip_mng_msgs::serviceQuery::Response &res ); // almost done
         void odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsgPtr); // done
 
-        void cubeCallback( const cv_msgs::Cube& cube_detect ); // in progress
+        void cubeCallback( const tgrip_cv_msgs::Cube& cube_detect ); // in progress
         // functions, task oriented
         void tskTimedPatrolGoalCB();    // TODO, together
         // void tskMeteredPatrolGoalCB();    // TODO, together

@@ -1,1 +1,0 @@
-string feedbackCode # a human-friendly feedback report

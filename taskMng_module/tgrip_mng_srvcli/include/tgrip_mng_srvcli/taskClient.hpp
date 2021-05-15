@@ -1,6 +1,6 @@
 #include <ros/ros.h>
 #include <std_msgs/String.h>
-#include <tgrip_taskMng_msgs/serviceQuery.h>
+#include <tgrip_mng_msgs/serviceQuery.h>
 
 namespace tgrip{
 

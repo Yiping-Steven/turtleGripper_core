@@ -1,7 +1,7 @@
 #include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
-#include <tgrip_taskMng_srvcli/taskClient.hpp>
-// #include <tgrip_taskMng_actions/moveAction.h>
+#include <tgrip_mng_srvcli/taskClient.hpp>
+// #include <tgrip_mng_actions/moveAction.h>
 // #include <tgrip_taskmng_actions/moveFeedback.h>
 #include <iostream>
 #include <sstream>
@@ -13,10 +13,10 @@ string taskNameArray[] = {"mapping", "fetching", "timedPatrol", "meteredPatrol"}
 string taskName;
 
 int main( int argc, char** argv ){
-    ros::init( argc, argv, "tGrip_TaskMng_Client");
+    ros::init( argc, argv, "tgrip_mng_client");
     ros::NodeHandle nh;
     tgrip::tskMngCliClass client(nh);
-    tgrip_taskMng_msgs::serviceQuery taskInitSrv;
+    tgrip_mng_msgs::serviceQuery taskInitSrv;
 
     while(ros::ok()){
 

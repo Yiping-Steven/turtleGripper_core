@@ -108,6 +108,11 @@ or if you built your own simulated or real world environment and want to create 
 roslaunch tgrip_nav_srvcli gmapping_demo.launch
 ```
 
+Control the turtlebot with keyboard
+```shell
+roslaunch turtlebot_teleop keyboard_teleop.launch
+```
+
 ### 4. For cube detection
 
 ```shell
