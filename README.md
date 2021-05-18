@@ -128,5 +128,8 @@ roslaunch tgrip_nav_srvcli view_navigation.launch
 ### 6. Start the manager node 
 
 ```
-rosrun tgrip_taskMng_srvcli client_node
+rosrun tgrip_mng_srvcli taskServer_node
+```
+```
+rosrun tgrip_mng_srvcli taskClient_node
 ```
