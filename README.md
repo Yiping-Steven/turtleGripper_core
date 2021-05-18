@@ -125,11 +125,13 @@ roslaunch tgrip_cv_cube find_cube.launch
 roslaunch tgrip_nav_srvcli view_navigation.launch
 ```
 
-### 6. Start the manager node 
+### 6. Start the manager node  (not fully tested yet)
 
+First launch the server. (to be automated)
 ```
 rosrun tgrip_mng_srvcli taskServer_node
 ```
+Then launch the user interface:
 ```
 rosrun tgrip_mng_srvcli taskClient_node
 ```
