@@ -1,5 +1,5 @@
 # TurtleGripper
-A mobile manipulator robot designed for household usage. Let's realize the dream of throwing your socks freeeeeely!
+A mobile manipulator robot designed for household usage. Let's realize the dream of throwing your socks freeeeeely! For more details, please visit our [wiki page](https://github.com/Yiping-Steven/turtleGripper_core/wiki)
 
 # Demos
 By May 13th, the turtleGripper (or "tgrip") can do:
